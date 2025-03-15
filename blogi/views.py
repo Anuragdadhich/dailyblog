@@ -38,25 +38,31 @@ def home(request):
     return render(request, 'home.html', context)
 
 def category_posts(request, slug):
+    categories = Category.objects.all() 
     category = get_object_or_404(Category, slug=slug)
     popular_posts = Post.objects.order_by('-views')[:5]
     posts = Post.objects.filter(categories=category)
-    return render(request, 'category_post.html', {'category': category, 'posts': posts,popular_posts:'popular_posts'})
+    return render(request, 'category_post.html', {'category': category, 'posts': posts,popular_posts:'popular_posts','categories':categories})
 
 def popular_posts(request):
+    categories = Category.objects.all() 
     popular_posts = Post.objects.order_by('-views')[:10]  # Fetch top 10 popular posts
     return render(request, 'popular_posts.html', {
         'popular_posts': popular_posts,
+        'categories':categories
     })
 
 def post_detail(request, slug):
+    categories = Category.objects.all() 
     post = get_object_or_404(Post, slug=slug)
     related_posts = Post.objects.filter(categories__in=post.categories.all()).exclude(id=post.id)[:2]  # Fetch related posts
     post.increment_views()  # Increment view count
     popular_posts = Post.objects.order_by('-views')[:5]
-    return render(request, 'post_detail.html', {'post': post, 'related_posts': related_posts,'popular_posts': popular_posts,})
+    return render(request, 'post_detail.html', {'post': post, 'related_posts': related_posts,'popular_posts': popular_posts,'categories':categories})
 
 def search(request):
+    popular_posts = Post.objects.order_by('-views')[:5]
+    categories = Category.objects.all() 
     query = request.GET.get('q')  # Get the search query from the URL
     if query:
         # Filter posts by title or content
@@ -69,6 +75,8 @@ def search(request):
     return render(request, 'search.html', {
         'posts': posts,
         'query': query,
+        'categories':categories,
+        'popular_posts':popular_posts
     })
 def privacy(request):
     return render(request, "privacy.html")
