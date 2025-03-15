@@ -9,11 +9,11 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import dj_database_url
 from pathlib import Path
 import os
 from whitenoise.storage import CompressedManifestStaticFilesStorage
-import dj_database_url
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
