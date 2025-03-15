@@ -13,6 +13,11 @@ import dj_database_url
 from pathlib import Path
 import os
 from whitenoise.storage import CompressedManifestStaticFilesStorage
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+# Cloudinary Configuration
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -140,6 +145,17 @@ DATABASES = {
         "postgresql://dailydjangoblog_user:vnEBmYNO9Wx9Mm8Dj3VIhoeoibbvClYx@dpg-cvakrc7noe9s73fb1fug-a.oregon-postgres.render.com/dailydjangoblog"
     )
 }
+
+
+cloudinary.config( 
+  cloud_name = "dcl4tnrjn",  
+  api_key = "863211316764786",  
+  api_secret = "XEQwPYVxd95rc4QD7jWYxqQyk8U"  
+)
+
+# Media files configuration
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 

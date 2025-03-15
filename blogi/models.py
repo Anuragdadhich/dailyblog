@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.utils.text import slugify
 from tinymce.models import HTMLField
-
+from cloudinary.models import CloudinaryField
 class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, blank=True)
@@ -22,7 +22,7 @@ class Category(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=200)
     content = HTMLField()
-    image = models.ImageField(upload_to='post_images/', blank=True, null=True)
+    image = CloudinaryField('image')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     categories = models.ManyToManyField(Category)
     published_date = models.DateTimeField(default=timezone.now)
