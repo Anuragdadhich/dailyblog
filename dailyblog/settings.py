@@ -48,11 +48,8 @@ X_FRAME_OPTIONS = 'DENY'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-d4l&v94#-e5aq+_4qjfl59#*kifkz)!ogz%3u1a9&efnxbjch$'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-
-
-ALLOWED_HOSTS = ["https://dailyblog-9kxn.onrender.com","*"]
+ALLOWED_HOSTS = ["https://dailyblog-9kxn.onrender.com","127.0.0.1:8000"]
 
 # Application definition
 
