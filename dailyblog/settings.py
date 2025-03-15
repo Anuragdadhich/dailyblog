@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 from whitenoise.storage import CompressedManifestStaticFilesStorage
+import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -51,8 +52,7 @@ SECRET_KEY = 'django-insecure-d4l&v94#-e5aq+_4qjfl59#*kifkz)!ogz%3u1a9&efnxbjch$
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-ALLOWED_HOSTS = ["*"]
-
+ALLOWED_HOSTS = ["https://dailyblog-9kxn.onrender.com","*"]
 
 # Application definition
 
@@ -138,7 +138,11 @@ DATABASES = {
     }
 }
 
-
+DATABASES = {
+    'default': dj_database_url.parse(
+        "postgresql://dailydjangoblog_user:vnEBmYNO9Wx9Mm8Dj3VIhoeoibbvClYx@dpg-cvakrc7noe9s73fb1fug-a.oregon-postgres.render.com/dailydjangoblog"
+    )
+}
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 

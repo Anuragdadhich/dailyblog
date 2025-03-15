@@ -8,13 +8,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <audio id="clickSound" src="{% static 'sounds/mixkit-clear-mouse-clicks-2997.wav' %}"></audio>
-     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8581421603188510"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8581421603188510" crossorigin="anonymous"></script>
 </head>
 <body class="windows-xp-theme">
     <!-- Cursor Animation -->
@@ -63,31 +60,20 @@
             </div>
 
             <!-- Sidebar -->
-            <div class="col-md-3 order-md-2 order-1 sidebar">
+            <div class="col-md-3 order-md-2 order-1">
                 <!-- Mobile Sidebar Toggle Button -->
-                <button class="btn btn-primary mt-2 d-md-none  mb-3 sidebar-toggle"  id="sidebarToggle">
+                <button class="btn btn-primary d-md-none mb-3" id="sidebarToggle">
                     →
                 </button>
 
                 <!-- Sidebar Content -->
-                <div class="sidebar-content">
-                  
-<!-- In your base.html -->
-<!-- In your sidebar section -->
-<form class="d-flex mt-2" 
-      action="{% url 'search' %}" 
-      method="GET"
-      id="searchForm"
-      onsubmit="return validateSearch(event)">
-    <input class="form-control me-2" 
-           type="search" 
-           name="q" 
-           id="searchInput"
-           placeholder="Search posts..." 
-           aria-label="Search"
-           required>
-    <button class="btn btn-outline-primary" type="submit">Search</button>
-</form>
+                <div class="sidebar-content" id="sidebarContent">
+                    <!-- Search Form -->
+                    <form class="d-flex mt-2" action="{% url 'search' %}" method="GET" id="searchForm" onsubmit="return validateSearch(event)">
+                        <input class="form-control me-2" type="search" name="q" id="searchInput" placeholder="Search posts..." aria-label="Search" required>
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                    </form>
+
                     <!-- Ads Block -->
                     <div class="ads-block mb-4 my-4 mx-2">
                         <h3>Follow Us</h3>
@@ -109,16 +95,12 @@
                     </ul>
 
                     <!-- About Me Section -->
-                     {% block about %}
                     <div class="sidebar-about win-xp-box">
+                        {% block about %}
                         <div class="author-box">
                             <!-- Author Image with Animation -->
                             <div class="author-image-container">
-                                <img src="{% static 'images/OIP.jpeg' %}" 
-                                     class="author-image" 
-                                     alt="Author Photo"
-                                     onmouseover="this.style.transform='translateY(-2px)'"
-                                     onmouseout="this.style.transform='translateY(0)'">
+                                <img src="{% static 'images/OIP.jpeg' %}" class="author-image" alt="Author Photo" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
                             </div>
 
                             <!-- Author Bio -->
@@ -131,87 +113,84 @@
                                     🕹️ Retro computing collector
                                 </p>
                             </div>
-
                         </div>
+                        {% endblock about %}
                     </div>
-                    {% endblock about %}
                 </div>
-                
             </div>
         </div>
     </div>
-<!-- Footer Section -->
-<footer class="windows-xp-old-footer">
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Quick Links -->
-            <div class="col-md-4">
-                <h4 class="footer-title">Quick Links</h4>
-                <ul class="footer-links">
-                    <li><a href="{% url 'home' %}" class="footer-link">🏠 Home</a></li>
-                    <li><a href="" class="footer-link">📄 About</a></li>
-                    <li><a href="{% url 'privacy' %}" class="footer-link">🔒 Privacy Policy</a></li>
-                </ul>
-            </div>
 
-            <!-- Social Media Links -->
-            <div class="col-md-4">
-                <h4 class="footer-title">Follow Us</h4>
-                <div class="social-icons">
-                    <a href="https://facebook.com" class="social-icon" target="_blank" title="Facebook">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-                    <a href="https://twitter.com" class="social-icon" target="_blank" title="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="https://linkedin.com" class="social-icon" target="_blank" title="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://whatsapp.com" class="social-icon" target="_blank" title="WhatsApp">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
+    <!-- Footer Section -->
+    <footer class="windows-xp-old-footer">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Quick Links -->
+                <div class="col-md-4">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'home' %}" class="footer-link">🏠 Home</a></li>
+                        <li><a href="" class="footer-link">📄 About</a></li>
+                        <li><a href="{% url 'privacy' %}" class="footer-link">🔒 Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social Media Links -->
+                <div class="col-md-4">
+                    <h4 class="footer-title">Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="https://facebook.com" class="social-icon" target="_blank" title="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://twitter.com" class="social-icon" target="_blank" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://linkedin.com" class="social-icon" target="_blank" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://whatsapp.com" class="social-icon" target="_blank" title="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Copyright and Legal Info -->
+                <div class="col-md-4">
+                    <h4 class="footer-title">Legal</h4>
+                    <p class="footer-text">
+                        &copy; 2025 Daily Blog. All rights reserved.<br>
+                        Designed with ❤️ for retro enthusiasts.
+                    </p>
                 </div>
             </div>
-
-            <!-- Copyright and Legal Info -->
-            <div class="col-md-4">
-                <h4 class="footer-title">Legal</h4>
-                <p class="footer-text">
-                    &copy; 2025 Daily Blog. All rights reserved.<br>
-                    Designed with ❤️ for retro enthusiasts.
-                </p>
-            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
- <!--   <script src="{% static 'js/script.js' %}"></script>-->
-<script>
-               
-function validateSearch(event) {
-    const input = document.getElementById('searchInput');
-    if (input.value.trim().length < 2) {
-        alert('Please enter at least 2 characters for search');
-        event.preventDefault(); // Prevent form submission
-        return false;
-    }  
-    // Play click sound if needed
-    const clickSound = document.getElementById('clickSound');
-    clickSound.play();
-    
-    return true; // Allow form submission
-}
+    <script>
+        function validateSearch(event) {
+            const input = document.getElementById('searchInput');
+            if (input.value.trim().length < 2) {
+                alert('Please enter at least 2 characters for search');
+                event.preventDefault(); // Prevent form submission
+                return false;
+            }
+            // Play click sound if needed
+            const clickSound = document.getElementById('clickSound');
+            clickSound.play();
+            return true; // Allow form submission
+        }
 
-// Add event listener properly
-document.getElementById('searchForm').addEventListener('submit', validateSearch);
+        // Add event listener properly
+        document.getElementById('searchForm').addEventListener('submit', validateSearch);
 
-document.getElementById('sidebarToggle').addEventListener('click', function() {
-    const sidebarContent = document.querySelector('.sidebar-content');
-    sidebarContent.classList.toggle('show');
-});
-</script>        
+        // Sidebar toggle functionality
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            const sidebarContent = document.getElementById('sidebarContent');
+            sidebarContent.classList.toggle('show');
+        });
+    </script>
 </body>
 </html>
