@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<div class="container-fluid search-results-container">
+    <!-- Search Results Heading -->
+    <h1 class="search-results-heading">Search Results for "{{ query }}"</h1>
+
+    <!-- Search Results List -->
+    <div class="search-results-list">
+        {% if posts %}
+            {% for post in posts %}
+                <div class="search-result">
+                    <!-- Post Title -->
+                    <h2 class="search-result-title">
+                        <a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a>
+                    </h2>
+
+                    <!-- Post Excerpt -->
+                    <p class="search-result-excerpt">{{ post.content|truncatewords:30 }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No results found for "{{ query }}".</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

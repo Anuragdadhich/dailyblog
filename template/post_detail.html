@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ post.title }} - My Blog{% endblock %}
+
+{% block content %}
+<div class="container-fluid post-detail-container windows-xp-theme">
+    <!-- Post Detail -->
+    <div class="row">
+        <!-- Main Post Content -->
+        <div class="col-md-8">
+            <!-- Post Title -->
+            <h1 class="post-title win-xp-title">{{ post.title }}</h1>
+
+            <!-- Post Meta -->
+            <div class="post-meta win-xp-meta">
+                <span class="author">👤 By {{ post.author.username }}</span>
+                <span class="published-date">📅 Published on: {{ post.published_date|date:"F j, Y, g:i a" }}</span>
+            </div>
+
+            <!-- Post Image -->
+            {% if post.image %}
+                <img src="{{ post.image.url }}" class="img-fluid post-image win-xp-image" alt="{{ post.title }}">
+            {% else %}
+                <img src="https://via.placeholder.com/800x400" class="img-fluid post-image win-xp-image" alt="Placeholder">
+            {% endif %}
+
+            <!-- Post Content -->
+            <div class="post-content win-xp-text">
+                {{ post.content|linebreaks }}
+            </div>
+
+            <!-- Social Icons with Share Functionality -->
+            <div class="social-icons win-xp-social">
+                <h3>📤 Share this post:</h3>
+                {% with post_url=request.build_absolute_uri %}
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ post_url }}" 
+                       class="social-icon" 
+                       target="_blank" 
+                       title="Share on Facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+
+                    <!-- Twitter -->
+                    <a href="https://twitter.com/intent/tweet?url={{ post_url }}&text={{ post.title }}" 
+                       class="social-icon" 
+                       target="_blank" 
+                       title="Share on Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ post_url }}" 
+                       class="social-icon" 
+                       target="_blank" 
+                       title="Share on LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+
+                    <!-- WhatsApp -->
+                    <a href="https://api.whatsapp.com/send?text={{ post.title }} - {{ post_url }}" 
+                       class="social-icon" 
+                       target="_blank" 
+                       title="Share on WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                {% endwith %}
+            </div>
+            {% block about %}
+           
+            {% endblock about %}
+            <!-- Back to Home Button -->
+            <div class="text-center mt-5">
+                <a href="{% url 'home' %}" class="btn btn-primary win-xp-button">
+                     Back to Home
+                </a>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-md-4">
+            <!-- Related Posts -->
+            <div class="related-posts win-xp-box">
+                <h3 class="win-xp-title"> Related Posts</h3>
+                {% for related_post in related_posts %}
+                    <div class="card mb-3 win-xp-card">
+                        {% if related_post.image %}
+                            <img src="{{ related_post.image.url }}" class="card-img-top win-xp-image" alt="{{ related_post.title }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/300x200" class="card-img-top win-xp-image" alt="Placeholder">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title win-xp-subtitle">{{ related_post.title }}</h5>
+                            <p class="card-text win-xp-text">{{ related_post.content|truncatewords:20 }}</p>
+                            <a href="{% url 'post_detail' related_post.slug %}" class="btn btn-primary win-xp-button">
+                                📖 Read More
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Retro Ad Block -->
+            <div class="retro-ad win-xp-box mt-4">
+                <h3 class="win-xp-title">💾 Retro Ads</h3>
+                <div class="ad-content">
+                    <p class="win-xp-text">
+                        Upgrade your blog experience with our retro-themed tools! 🛠️
+                    </p>
+                    <button class="btn btn-primary win-xp-button">
+                        🚀 Explore Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

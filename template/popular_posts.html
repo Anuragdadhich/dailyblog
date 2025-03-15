@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Popular Posts - My Blog{% endblock %}
+
+{% block content %}
+<div class="container-fluid popular-posts-container">
+    <!-- Popular Posts Heading -->
+    <h1 class="popular-posts-heading">Popular Posts</h1>
+
+    <!-- Popular Posts List -->
+    <div class="popular-posts-list">
+        {% for post in popular_posts %}
+            <div class="popular-post">
+                <!-- Post Image in a Small Box -->
+                <div class="popular-post-image-box">
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" class="popular-post-image" alt="{{ post.title }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/100x100" class="popular-post-image" alt="Placeholder">
+                    {% endif %}
+                </div>
+
+                <!-- Post Title and Excerpt -->
+                <div class="popular-post-content">
+                    <h2 class="popular-post-title">{{ post.title }}</h2>
+                    <p class="popular-post-excerpt">{{ post.content|truncatewords:20 }}</p>
+                    <a href="{% url 'post_detail' post.slug %}" class="popular-post-read-more">Read More</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

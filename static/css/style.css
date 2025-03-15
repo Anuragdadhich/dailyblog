@@ -1,0 +1,916 @@
+/* Retro Windows Theme */
+@font-face {
+    font-family: 'MS Sans Serif';
+    src: url('/static/fonts/ms-sans-serif.ttf') format('truetype');
+}
+body.windows-xp-theme {
+    background-color: #f0f0f0; /* Light gray background */
+    color: #000;
+    font-family: 'MS Sans Serif', sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    
+}
+/* Home Page Styles */
+.home-container {
+    padding: 20px;
+}
+
+/* Divider */
+.divider {
+    border-top: 2px solid #0078d7; /* Windows XP blue */
+    margin: 40px 0;
+}
+
+/* Featured Post */
+.featured-post .card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.featured-post .card-title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.featured-post .card-text {
+    font-size: 1.1rem;
+}
+
+/* Recent Posts and Category Posts */
+.recent-posts .card,
+.category-section .card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure cards take full height */
+}
+
+.recent-posts .card-img-top,
+.category-section .card-img-top {
+    width: 100%;
+    height: 200px; /* Fixed height for images */
+    object-fit: cover; /* Ensure images fill the space */
+}
+
+.recent-posts .card-body,
+.category-section .card-body {
+    flex: 1; /* Allow card body to grow and fill space */
+    display: flex;
+    flex-direction: column;
+}
+
+.recent-posts .card-title,
+.category-section .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.recent-posts .card-text,
+.category-section .card-text {
+    font-size: 0.9rem;
+}
+
+.recent-posts .btn-primary,
+.category-section .btn-primary {
+    margin-top: auto; /* Push button to the bottom */
+}
+
+/* Category Grid Layout */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid columns */
+    gap: 20px; /* Spacing between grid items */
+}
+
+.category-post {
+    break-inside: avoid; /* Prevent items from breaking across columns */
+}
+
+.category-post .card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure cards take full height */
+}
+
+.category-post .card-img-top {
+    width: 100%;
+    height: auto; /* Allow images to scale naturally */
+    object-fit: cover; /* Ensure images fill the space */
+    border-radius: 8px 8px 0 0; /* Rounded corners for the top */
+}
+
+.category-post .card-body {
+    padding: 15px;
+    flex: 1; /* Allow card body to grow and fill space */
+    display: flex;
+    flex-direction: column;
+}
+
+.category-post .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.category-post .card-text {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.category-post .btn-primary {
+    margin-top: auto; /* Push button to the bottom */
+    align-self: flex-start; /* Align button to the left */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .category-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust for smaller screens */
+    }
+
+    .category-post .card-title {
+        font-size: 1rem;
+    }
+
+    .category-post .card-text {
+        font-size: 0.8rem;
+    }
+}
+/* Featured Post */
+.featured-post .card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.featured-post .card-title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.featured-post .card-text {
+    font-size: 1.1rem;
+}
+
+/* Recent Posts */
+.recent-posts .card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.recent-posts .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.recent-posts .card-text {
+    font-size: 1rem;
+}
+
+/* Small Posts */
+.small-post {
+    background-color: #fff;
+    border: 1px solid #0078d7; /* Windows XP blue */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.small-post .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.small-post .card-text {
+    font-size: 0.9rem;
+}
+
+/* Categories */
+.categories .card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.categories .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.categories .card-text {
+    font-size: 1rem;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #0078d7; /* Windows XP blue */
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #005a9e; /* Darker blue on hover */
+}
+
+.btn-outline-primary {
+    border-color: #0078d7;
+    color: #0078d7;
+}
+
+.btn-outline-primary:hover {
+    background-color: #0078d7;
+    color: #fff;
+}
+
+
+.post-detail-container {
+    padding: 20px;
+}
+
+/* Post Title */
+.post-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0078d7; /* Windows XP blue */
+}
+
+/* Post Meta */
+.post-meta {
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.post-meta .author {
+    font-weight: bold;
+}
+
+.post-meta .published-date {
+    margin-left: 10px;
+}
+
+/* Post Image */
+.post-image {
+    width: 100%;
+    height: auto;
+    border: 2px solid #0078d7; /* Windows XP blue */
+    margin-bottom: 20px;
+}
+
+/* Post Content */
+.post-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+/* Social Icons */
+.social-icons {
+    margin-bottom: 40px;
+}
+
+.social-icons h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.social-icons .social-icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    color: #0078d7; /* Windows XP blue */
+}
+
+.social-icons .social-icon:hover {
+    color: #005a9e; /* Darker blue on hover */
+}
+
+/* Related Posts */
+.related-posts .card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.related-posts .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.related-posts .card-text {
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .post-title {
+        font-size: 2rem;
+    }
+
+    .post-content {
+        font-size: 1rem;
+    }
+
+    .related-posts .card-title {
+        font-size: 1rem;
+    }
+}
+/* Category Posts Page */
+.category-posts-container {
+    padding: 20px;
+}
+
+.category-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0078d7; /* Windows XP blue */
+    margin-bottom: 20px;
+}
+
+.category-description {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+/* Cards */
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+    border-bottom: 2px solid #0078d7; /* Windows XP blue */
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0078d7; /* Windows XP blue */
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #333;
+}
+
+.text-muted {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.btn-primary {
+    background-color: #0078d7; /* Windows XP blue */
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #005a9e; /* Darker blue on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .category-title {
+        font-size: 2rem;
+    }
+
+    .category-description {
+        font-size: 1rem;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+    }
+}
+/* Popular Posts Page */
+.popular-posts-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.popular-posts-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0078d7; /* Windows XP blue */
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.popular-posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.popular-post {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Small Image Box */
+.popular-post-image-box {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #0078d7; /* Windows XP blue */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Ensure the image doesn't overflow the box */
+}
+
+.popular-post-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image fits inside the box */
+}
+
+.popular-post-content {
+    flex: 1;
+}
+
+.popular-post-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0078d7; /* Windows XP blue */
+    margin-bottom: 10px;
+}
+
+.popular-post-excerpt {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.popular-post-read-more {
+    font-size: 0.9rem;
+    color: #0078d7; /* Windows XP blue */
+    text-decoration: none;
+}
+
+.popular-post-read-more:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design for Small Devices */
+@media (max-width: 768px) {
+    .popular-posts-heading {
+        font-size: 2rem;
+    }
+
+    .popular-post {
+        flex-direction: column; /* Stack image and content vertically */
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .popular-post-image-box {
+        width: 100%; /* Full width for small devices */
+        height: auto;
+        border: none;
+    }
+
+    .popular-post-image {
+        width: 100%;
+        height: auto;
+        border: 2px solid #0078d7; /* Add border for small devices */
+    }
+
+    .popular-post-title {
+        font-size: 1.2rem;
+    }
+
+    .popular-post-excerpt {
+        font-size: 0.9rem;
+    }
+
+    .popular-post-read-more {
+        font-size: 0.8rem;
+    }
+}
+/* Search Results Page */
+.search-results-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.search-results-heading {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #0078d7; /* Windows XP blue */
+    margin-bottom: 20px;
+}
+
+.search-results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.search-result {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+}
+
+.search-result-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0078d7; /* Windows XP blue */
+    margin-bottom: 10px;
+}
+
+.search-result-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.search-result-title a:hover {
+    text-decoration: underline;
+}
+
+.search-result-excerpt {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-results-heading {
+        font-size: 1.5rem;
+    }
+
+    .search-result-title {
+        font-size: 1.2rem;
+    }
+
+    .search-result-excerpt {
+        font-size: 0.9rem;
+    }
+}
+/* Windows XP About Me Section */
+.sidebar-about {
+    background: #ece9d8;
+    border: 2px solid #003399;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+}
+
+.author-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.author-image-container {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #003399;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.author-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(0.2) contrast(1.1);
+}
+
+.author-info {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.win-xp-title {
+    color: #003399;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 0px white;
+}
+
+.win-xp-text {
+    color: #1a1a1a;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.xp-social-links {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.xp-social-link {
+    display: block;
+    transition: all 0.3s ease;
+    filter: grayscale(100%);
+    opacity: 0.8;
+}
+
+.xp-social-link:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.xp-social-icon {
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+}
+   /* Windows XP Styling */
+   .windows-xp-theme {
+    background-color: #ece9d8;
+    font-family: 'Arial', sans-serif;
+}
+
+.win-xp-box {
+    background: #ffffff;
+    border: 2px solid #003366;
+    border-radius: 3px;
+    box-shadow: 3px 3px 0px #cccccc;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.win-xp-title {
+    color: #003366;
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.win-xp-text {
+    color: #333333;
+    line-height: 1.4;
+    font-size: 0.9rem;
+}
+
+.xp-social-links {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.xp-social-icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s ease;
+}
+
+.xp-social-icon:hover {
+    transform: scale(1.2);
+}
+
+/* Sidebar Mobile Toggle */
+.sidebar-content {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .sidebar-content {
+        display: none;
+    }
+
+    .sidebar-content.show {
+        display: block;
+
+    }
+}
+
+/* Animations */
+.author-image-container {
+    transition: transform 0.3s ease;
+}
+
+.author-image-container:hover {
+    transform: translateY(-5px);
+}
+/* Classic XP Button Animation */
+.xp-social-link:active {
+    position: relative;
+    top: 1px;
+    left: 1px;
+}
+
+/* CRT Screen Effect */
+@media (min-width: 768px) {
+    .author-image-container:hover {
+        box-shadow: 0 0 10px rgba(0,51,153,0.3);
+        transform: scale(1.05);
+    }
+}
+    /* Windows XP Styling */
+    .windows-xp-theme {
+        background-color: #ece9d8;
+        font-family: 'Arial', sans-serif;
+        padding: 20px;
+    }
+
+    .win-xp-title {
+        color: #003366;
+        font-weight: bold;
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    .win-xp-subtitle {
+        color: #003366;
+        font-weight: bold;
+        font-size: 1.25rem;
+    }
+
+    .win-xp-text {
+        color: #333333;
+        line-height: 1.6;
+        font-size: 1rem;
+    }
+
+    .win-xp-meta {
+        color: #666666;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+
+    .win-xp-image {
+        border: 2px solid #003366;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .win-xp-box {
+        background: #ffffff;
+        border: 2px solid #003366;
+        border-radius: 5px;
+        box-shadow: 3px 3px 0px #cccccc;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .win-xp-button {
+        background-color: #0078d7;
+        border: 1px solid #003366;
+        color: white;
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        border-radius: 3px;
+        transition: background-color 0.3s ease;
+    }
+
+    .win-xp-button:hover {
+        background-color: #0056b3;
+    }
+
+    .win-xp-social {
+        margin-top: 20px;
+    }
+
+    .social-icon {
+        color: #003366;
+        font-size: 1.5rem;
+        margin-right: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    .social-icon:hover {
+        transform: scale(1.2);
+        color: #0078d7;
+    }
+
+    /* Animations */
+    .win-xp-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .win-xp-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 5px 5px 0px #cccccc;
+    }
+
+    .retro-ad {
+        text-align: center;
+    }
+
+    .retro-ad .win-xp-button {
+        margin-top: 10px;
+    }
+/* Pagination Styling */
+.win-xp-pagination .page-link {
+    background-color: #0078d7;
+    border: 1px solid #003366;
+    color: white;
+    margin: 0 2px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+.win-xp-pagination .page-link:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+.win-xp-pagination .page-item.disabled .page-link {
+    background-color: #cccccc;
+    border-color: #999999;
+    color: #666666;
+}
+
+.win-xp-pagination .page-item.active .page-link {
+    background-color: #003366;
+    border-color: #003366;
+    color: white;
+}
+/* Social Icons Styling */
+.win-xp-social {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.social-icon {
+    color: #003366;
+    font-size: 1.5rem;
+    margin-right: 10px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+    color: #0078d7;
+}
+
+
+/* Windows XP Older Footer Styling */
+.windows-xp-old-footer {
+    background-color: #ece9d8; /* Light gray background */
+    border-top: 2px solid #003366; /* Classic blue border */
+    padding: 20px 0;
+    font-family: 'Arial', sans-serif;
+    color: #333333; /* Dark gray text */
+}
+
+.footer-title {
+    color: #003366; /* Windows XP blue */
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 8px;
+}
+
+.footer-link {
+    color: #333333; /* Dark gray text */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #0078d7; /* Windows XP hover blue */
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.social-icon {
+    color: #003366; /* Windows XP blue */
+    font-size: 1.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #0078d7; /* Windows XP hover blue */
+    transform: scale(1.2);
+}
+
+.footer-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+    color: #333333; /* Dark gray text */
+}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }} - My Blog{% endblock %}
+
+{% block content %}
+<div class="container-fluid category-posts-container">
+    <!-- Category Name -->
+    <h1 class="category-title">{{ category.name }}</h1>
+
+    <!-- Category Description -->
+    {% if category.description %}
+        <p class="category-description">{{ category.description }}</p>
+    {% endif %}
+
+    <!-- Posts in Category -->
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/600x400" class="card-img-top" alt="Placeholder">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.content|truncatewords:30 }}</p>
+                        <p class="text-muted">Published on: {{ post.published_date|date:"F j, Y" }}</p>
+                        <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
