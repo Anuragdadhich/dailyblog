@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home,category_posts,popular_posts,post_detail,search  # Import your view function
+from .views import home,category_posts,popular_posts,post_detail,search,privacy  # Import your view function
 
 
 urlpatterns = [
@@ -8,4 +8,5 @@ urlpatterns = [
     path('post/<slug:slug>/', post_detail, name='post_detail'),
     path('search/', search, name='search'),
     path('popular/', popular_posts, name='popular_posts'),
+    path('privacy', privacy, name='privacy'),
 ]

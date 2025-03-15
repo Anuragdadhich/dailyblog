@@ -70,3 +70,5 @@ def search(request):
         'posts': posts,
         'query': query,
     })
+def privacy(request):
+    return render(request, "privacy.html")
