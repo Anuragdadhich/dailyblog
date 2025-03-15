@@ -23,7 +23,7 @@
                 <!-- Post Title and Excerpt -->
                 <div class="popular-post-content">
                     <h2 class="popular-post-title">{{ post.title }}</h2>
-                    <p class="popular-post-excerpt">{{ post.content|truncatewords:20 }}</p>
+                    <p class="popular-post-excerpt">{{ post.content| safe|truncatewords:20 }}</p>
                     <a href="{% url 'post_detail' post.slug %}" class="popular-post-read-more">Read More</a>
                 </div>
             </div>

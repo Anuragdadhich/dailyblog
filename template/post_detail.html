@@ -26,7 +26,7 @@
 
             <!-- Post Content -->
             <div class="post-content win-xp-text">
-                {{ post.content|linebreaks }}
+                {{ post.content| safe|linebreaks }}
             </div>
 
             <!-- Social Icons with Share Functionality -->
@@ -91,7 +91,7 @@
                         {% endif %}
                         <div class="card-body">
                             <h5 class="card-title win-xp-subtitle">{{ related_post.title }}</h5>
-                            <p class="card-text win-xp-text">{{ related_post.content|truncatewords:20 }}</p>
+                            <p class="card-text win-xp-text">{{ related_post.content| safe|truncatewords:20 }}</p>
                             <a href="{% url 'post_detail' related_post.slug %}" class="btn btn-primary win-xp-button">
                                 📖 Read More
                             </a>

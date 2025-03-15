@@ -18,7 +18,7 @@
                     </h2>
 
                     <!-- Post Excerpt -->
-                    <p class="search-result-excerpt">{{ post.content|truncatewords:30 }}</p>
+                    <p class="search-result-excerpt">{{ post.content| safe|truncatewords:30 }}</p>
                 </div>
             {% endfor %}
         {% else %}
