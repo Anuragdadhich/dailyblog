@@ -720,9 +720,10 @@ body.windows-xp-theme {
 }
     /* Windows XP Styling */
     .windows-xp-theme {
-        background-color: #ece9d8;
+        background-color: #faf6ef;
         font-family: 'Arial', sans-serif;
         padding: 20px;
+
     }
 
     .win-xp-title {
@@ -859,7 +860,8 @@ body.windows-xp-theme {
 
 /* Windows XP Older Footer Styling */
 .windows-xp-old-footer {
-    background-color: #ece9d8; /* Light gray background */
+    margin-top: 12px;
+    background-color: #f6f0ea; /* Light gray background */
     border-top: 2px solid #003366; /* Classic blue border */
     padding: 20px 0;
     font-family: 'Arial', sans-serif;
