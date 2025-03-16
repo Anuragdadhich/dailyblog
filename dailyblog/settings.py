@@ -25,18 +25,12 @@ SECRET_KEY = "nJ1hnEZE8fFTjFp9fJsw1oJwEkDBvW_KrrBInii6yddtvaESxHZRa12ZE1TzR5KqKv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 DEBUG = True
 STATIC_URL = '/static/'
-
 MEDIA_URL = '/media/'
-
-if DEBUG:
-
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
-else:
-
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
 SECURE_HSTS_SECONDS = 3600
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True

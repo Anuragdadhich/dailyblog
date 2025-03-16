@@ -1,10 +1,17 @@
 /* Retro Windows Theme */
+@font-face {
+    font-family: 'MS Sans Serif';
+    src: url('/static/fonts/ms-sans-serif.ttf') format('truetype');
+}
+
 body.windows-xp-theme {
     background-color: #f0f0f0; /* Light gray background */
     color: #000;
-    font-family: monospace;
-    
+    font-family: 'MS Sans Serif', sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
 }
+
 /* Home Page Styles */
 .home-container {
     padding: 20px;
@@ -135,36 +142,6 @@ body.windows-xp-theme {
         font-size: 0.8rem;
     }
 }
-/* Featured Post */
-.featured-post .card {
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.featured-post .card-title {
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.featured-post .card-text {
-    font-size: 1.1rem;
-}
-
-/* Recent Posts */
-.recent-posts .card {
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.recent-posts .card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.recent-posts .card-text {
-    font-size: 1rem;
-}
 
 /* Small Posts */
 .small-post {
@@ -180,22 +157,6 @@ body.windows-xp-theme {
 
 .small-post .card-text {
     font-size: 0.9rem;
-}
-
-/* Categories */
-.categories .card {
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.categories .card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.categories .card-text {
-    font-size: 1rem;
 }
 
 /* Buttons */
@@ -218,19 +179,17 @@ body.windows-xp-theme {
     color: #fff;
 }
 
-
+/* Post Detail Page */
 .post-detail-container {
     padding: 20px;
 }
 
-/* Post Title */
 .post-title {
     font-size: 2.5rem;
     font-weight: bold;
     color: #0078d7; /* Windows XP blue */
 }
 
-/* Post Meta */
 .post-meta {
     margin-bottom: 20px;
     font-size: 0.9rem;
@@ -245,7 +204,6 @@ body.windows-xp-theme {
     margin-left: 10px;
 }
 
-/* Post Image */
 .post-image {
     width: 100%;
     height: auto;
@@ -253,7 +211,6 @@ body.windows-xp-theme {
     margin-bottom: 20px;
 }
 
-/* Post Content */
 .post-content {
     font-size: 1.1rem;
     line-height: 1.6;
@@ -296,20 +253,6 @@ body.windows-xp-theme {
     font-size: 0.9rem;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .post-title {
-        font-size: 2rem;
-    }
-
-    .post-content {
-        font-size: 1rem;
-    }
-
-    .related-posts .card-title {
-        font-size: 1rem;
-    }
-}
 /* Category Posts Page */
 .category-posts-container {
     padding: 20px;
@@ -328,62 +271,6 @@ body.windows-xp-theme {
     margin-bottom: 40px;
 }
 
-/* Cards */
-.card {
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.card-img-top {
-    width: 100%;
-    height: auto;
-    border-bottom: 2px solid #0078d7; /* Windows XP blue */
-}
-
-.card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #0078d7; /* Windows XP blue */
-}
-
-.card-text {
-    font-size: 1rem;
-    color: #333;
-}
-
-.text-muted {
-    font-size: 0.9rem;
-    color: #666;
-}
-
-.btn-primary {
-    background-color: #0078d7; /* Windows XP blue */
-    border: none;
-}
-
-.btn-primary:hover {
-    background-color: #005a9e; /* Darker blue on hover */
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .category-title {
-        font-size: 2rem;
-    }
-
-    .category-description {
-        font-size: 1rem;
-    }
-
-    .card-title {
-        font-size: 1.2rem;
-    }
-
-    .card-text {
-        font-size: 0.9rem;
-    }
-}
 /* Popular Posts Page */
 .popular-posts-container {
     padding: 20px;
@@ -413,7 +300,6 @@ body.windows-xp-theme {
     border-bottom: 1px solid #ddd;
 }
 
-/* Small Image Box */
 .popular-post-image-box {
     width: 100px;
     height: 100px;
@@ -457,42 +343,6 @@ body.windows-xp-theme {
     text-decoration: underline;
 }
 
-/* Responsive Design for Small Devices */
-@media (max-width: 768px) {
-    .popular-posts-heading {
-        font-size: 2rem;
-    }
-
-    .popular-post {
-        flex-direction: column; /* Stack image and content vertically */
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    .popular-post-image-box {
-        width: 100%; /* Full width for small devices */
-        height: auto;
-        border: none;
-    }
-
-    .popular-post-image {
-        width: 100%;
-        height: auto;
-        border: 2px solid #0078d7; /* Add border for small devices */
-    }
-
-    .popular-post-title {
-        font-size: 1.2rem;
-    }
-
-    .popular-post-excerpt {
-        font-size: 0.9rem;
-    }
-
-    .popular-post-read-more {
-        font-size: 0.8rem;
-    }
-}
 /* Search Results Page */
 .search-results-container {
     padding: 20px;
@@ -539,20 +389,6 @@ body.windows-xp-theme {
     color: #333;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .search-results-heading {
-        font-size: 1.5rem;
-    }
-
-    .search-result-title {
-        font-size: 1.2rem;
-    }
-
-    .search-result-excerpt {
-        font-size: 0.9rem;
-    }
-}
 /* Windows XP About Me Section */
 .sidebar-about {
     background: #ece9d8;
@@ -630,10 +466,11 @@ body.windows-xp-theme {
     height: 32px;
     image-rendering: pixelated;
 }
-   /* Windows XP Styling */
-   .windows-xp-theme {
-    background-color: #ece9d8;
-    font-family: 'Arial', sans-serif;
+
+/* Windows XP Styling */
+.windows-xp-theme {
+    background-color: #f2f0e4;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .win-xp-box {
@@ -653,8 +490,8 @@ body.windows-xp-theme {
 }
 
 .win-xp-text {
-    color: #333333;
-    line-height: 1.4;
+    color: #000000;
+    line-height: 1.3;
     font-size: 0.9rem;
 }
 
@@ -677,6 +514,7 @@ body.windows-xp-theme {
 /* Sidebar Mobile Toggle */
 .sidebar-content {
     display: block;
+    position: sticky;
 }
 
 @media (max-width: 768px) {
@@ -686,7 +524,6 @@ body.windows-xp-theme {
 
     .sidebar-content.show {
         display: block;
-
     }
 }
 
@@ -698,6 +535,7 @@ body.windows-xp-theme {
 .author-image-container:hover {
     transform: translateY(-5px);
 }
+
 /* Classic XP Button Animation */
 .xp-social-link:active {
     position: relative;
@@ -712,148 +550,11 @@ body.windows-xp-theme {
         transform: scale(1.05);
     }
 }
-    /* Windows XP Styling */
-    .windows-xp-theme {
-        background-color: #ece9d8;
-        font-family: 'Arial', sans-serif;
-        padding: 20px;
-    }
 
-    .win-xp-title {
-        color: #003366;
-        font-weight: bold;
-        font-size: 2rem;
-        margin-bottom: 15px;
-    }
-
-    .win-xp-subtitle {
-        color: #003366;
-        font-weight: bold;
-        font-size: 1.25rem;
-    }
-
-    .win-xp-text {
-        color: #333333;
-        line-height: 1.6;
-        font-size: 1rem;
-    }
-
-    .win-xp-meta {
-        color: #666666;
-        font-size: 0.9rem;
-        margin-bottom: 20px;
-    }
-
-    .win-xp-image {
-        border: 2px solid #003366;
-        border-radius: 5px;
-        margin-bottom: 20px;
-    }
-
-    .win-xp-box {
-        background: #ffffff;
-        border: 2px solid #003366;
-        border-radius: 5px;
-        box-shadow: 3px 3px 0px #cccccc;
-        padding: 15px;
-        margin-bottom: 20px;
-    }
-
-    .win-xp-button {
-        background-color: #0078d7;
-        border: 1px solid #003366;
-        color: white;
-        padding: 8px 16px;
-        font-size: 0.9rem;
-        border-radius: 3px;
-        transition: background-color 0.3s ease;
-    }
-
-    .win-xp-button:hover {
-        background-color: #0056b3;
-    }
-
-    .win-xp-social {
-        margin-top: 20px;
-    }
-
-    .social-icon {
-        color: #003366;
-        font-size: 1.5rem;
-        margin-right: 10px;
-        transition: transform 0.3s ease;
-    }
-
-    .social-icon:hover {
-        transform: scale(1.2);
-        color: #0078d7;
-    }
-
-    /* Animations */
-    .win-xp-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .win-xp-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 5px 5px 0px #cccccc;
-    }
-
-    .retro-ad {
-        text-align: center;
-    }
-
-    .retro-ad .win-xp-button {
-        margin-top: 10px;
-    }
-/* Pagination Styling */
-.win-xp-pagination .page-link {
-    background-color: #0078d7;
-    border: 1px solid #003366;
-    color: white;
-    margin: 0 2px;
-    border-radius: 3px;
-    transition: background-color 0.3s ease;
-}
-
-.win-xp-pagination .page-link:hover {
-    background-color: #0056b3;
-    color: white;
-}
-
-.win-xp-pagination .page-item.disabled .page-link {
-    background-color: #cccccc;
-    border-color: #999999;
-    color: #666666;
-}
-
-.win-xp-pagination .page-item.active .page-link {
-    background-color: #003366;
-    border-color: #003366;
-    color: white;
-}
-/* Social Icons Styling */
-.win-xp-social {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.social-icon {
-    color: #003366;
-    font-size: 1.5rem;
-    margin-right: 10px;
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.social-icon:hover {
-    transform: scale(1.2);
-    color: #0078d7;
-}
-
-
-/* Windows XP Older Footer Styling */
+/* Windows XP Footer */
 .windows-xp-old-footer {
-    background-color: #ece9d8; /* Light gray background */
+    margin-top: 12px;
+    background-color: #f6f0ea; /* Light gray background */
     border-top: 2px solid #003366; /* Classic blue border */
     padding: 20px 0;
     font-family: 'Arial', sans-serif;
