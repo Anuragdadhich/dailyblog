@@ -20,10 +20,10 @@ import cloudinary.api
 # Cloudinary Configuration
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+SECRET_KEY = "nJ1hnEZE8fFTjFp9fJsw1oJwEkDBvW_KrrBInii6yddtvaESxHZRa12ZE1TzR5KqKv0"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-DEBUG =False
+DEBUG = True
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
@@ -52,7 +52,7 @@ X_FRAME_OPTIONS = 'DENY'
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d4l&v94#-e5aq+_4qjfl59#*kifkz)!ogz%3u1a9&efnxbjch$'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 ALLOWED_HOSTS = ["dailyblog-9kxn.onrender.com","127.0.0.1"]
 

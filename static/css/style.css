@@ -469,8 +469,8 @@ body.windows-xp-theme {
 
 /* Windows XP Styling */
 .windows-xp-theme {
-    background-color: #ece9d8;
-    font-family: 'Arial', sans-serif;
+    background-color: #f2f0e4;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .win-xp-box {
@@ -490,8 +490,8 @@ body.windows-xp-theme {
 }
 
 .win-xp-text {
-    color: #333333;
-    line-height: 1.4;
+    color: #000000;
+    line-height: 1.3;
     font-size: 0.9rem;
 }
 
@@ -514,6 +514,7 @@ body.windows-xp-theme {
 /* Sidebar Mobile Toggle */
 .sidebar-content {
     display: block;
+    position: sticky;
 }
 
 @media (max-width: 768px) {

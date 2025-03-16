@@ -32,7 +32,7 @@
             <!-- Social Icons with Share Functionality -->
             <div class="social-icons win-xp-social">
                 <h3>📤 Share this post:</h3>
-                {% with post_url=request.build_absolute_uri %}
+                {% with post_url=request.build_absolute_uri %}  
                     <!-- Facebook -->
                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ post_url }}" 
                        class="social-icon" 
@@ -66,9 +66,7 @@
                     </a>
                 {% endwith %}
             </div>
-            {% block about %}
-           
-            {% endblock about %}
+
             <!-- Back to Home Button -->
             <div class="text-center mt-5">
                 <a href="{% url 'home' %}" class="btn btn-primary win-xp-button">
