@@ -11,38 +11,10 @@ body.windows-xp-theme {
     font-size: 18px;
     line-height: 1.6;
 }
-
 /* Home Page Styles */
 .home-container {
     padding: 20px;
 }
-
-/* Featured Post Styles */
-.featured-post .card {
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.featured-post .card-img-top {
-    width: 100%;
-    height: 300px; /* Fixed height for the featured image */
-    object-fit: cover; /* Ensure the image fills the space */
-}
-
-.featured-post .card-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #0078d7; /* Windows XP blue */
-}
-
-.featured-post .card-text {
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
-
-
-
-
 /* Pagination Styles */
 .win-xp-pagination .page-link {
     color: #0078d7; /* Windows XP blue */
@@ -53,117 +25,11 @@ body.windows-xp-theme {
     background-color: #0078d7;
     color: #fff;
 }
-
 /* Divider */
 .divider {
     border-top: 2px solid #0078d7; /* Windows XP blue */
     margin: 40px 0;
 }
-/* Recent Posts and Category Posts */
-.recent-posts .card,
-.category-section .card {
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    height: 100%; /* Ensure cards take full height */
-}
-
-.recent-posts .card-img-top,
-.category-section .card-img-top {
-    width: 100%;
-    height: 200px; /* Fixed height for images */
-    object-fit: cover; /* Ensure images fill the space */
-}
-
-.recent-posts .card-body,
-.category-section .card-body {
-    flex: 1; /* Allow card body to grow and fill space */
-    display: flex;
-    flex-direction: column;
-}
-
-.recent-posts .card-title,
-.category-section .card-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.recent-posts .card-text,
-.category-section .card-text {
-    font-size: 0.9rem;
-}
-
-.recent-posts .btn-primary,
-.category-section .btn-primary {
-    margin-top: auto; /* Push button to the bottom */
-}
-
-/* Category Grid Layout */
-.category-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid columns */
-    gap: 20px; /* Spacing between grid items */
-}
-
-.category-post {
-    break-inside: avoid; /* Prevent items from breaking across columns */
-}
-
-.category-post .card {
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    height: 100%; /* Ensure cards take full height */
-}
-
-.category-post .card-img-top {
-    width: 100%;
-    height: auto; /* Allow images to scale naturally */
-    object-fit: cover; /* Ensure images fill the space */
-    border-radius: 8px 8px 0 0; /* Rounded corners for the top */
-}
-
-.category-post .card-body {
-    padding: 15px;
-    flex: 1; /* Allow card body to grow and fill space */
-    display: flex;
-    flex-direction: column;
-}
-
-.category-post .card-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.category-post .card-text {
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-}
-
-.category-post .btn-primary {
-    margin-top: auto; /* Push button to the bottom */
-    align-self: flex-start; /* Align button to the left */
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .category-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust for smaller screens */
-    }
-
-    .category-post .card-title {
-        font-size: 1rem;
-    }
-
-    .category-post .card-text {
-        font-size: 0.8rem;
-    }
-}
-
 /* Small Posts */
 .small-post {
     background-color: #fff;
@@ -179,7 +45,6 @@ body.windows-xp-theme {
 .small-post .card-text {
     font-size: 0.9rem;
 }
-
 /* Buttons */
 .btn-primary {
     background-color: #0078d7; /* Windows XP blue */
@@ -199,45 +64,6 @@ body.windows-xp-theme {
     background-color: #0078d7;
     color: #fff;
 }
-
-/* Post Detail Page */
-.post-detail-container {
-    padding: 20px;
-}
-
-.post-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #0078d7; /* Windows XP blue */
-}
-
-.post-meta {
-    margin-bottom: 20px;
-    font-size: 0.9rem;
-    color: #666;
-}
-
-.post-meta .author {
-    font-weight: bold;
-}
-
-.post-meta .published-date {
-    margin-left: 10px;
-}
-
-.post-image {
-    width: 100%;
-    height: auto;
-    border: 2px solid #0078d7; /* Windows XP blue */
-    margin-bottom: 20px;
-}
-
-.post-content {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 40px;
-}
-
 /* Social Icons */
 .social-icons {
     margin-bottom: 40px;
@@ -257,7 +83,6 @@ body.windows-xp-theme {
 .social-icons .social-icon:hover {
     color: #005a9e; /* Darker blue on hover */
 }
-
 /* Related Posts */
 .related-posts .card {
     border: none;
@@ -273,25 +98,6 @@ body.windows-xp-theme {
 .related-posts .card-text {
     font-size: 0.9rem;
 }
-
-/* Category Posts Page */
-.category-posts-container {
-    padding: 20px;
-}
-
-.category-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #0078d7; /* Windows XP blue */
-    margin-bottom: 20px;
-}
-
-.category-description {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 40px;
-}
-
 /* Popular Posts Page */
 .popular-posts-container {
     padding: 20px;
@@ -363,7 +169,6 @@ body.windows-xp-theme {
 .popular-post-read-more:hover {
     text-decoration: underline;
 }
-
 /* Search Results Page */
 .search-results-container {
     padding: 20px;
@@ -409,7 +214,6 @@ body.windows-xp-theme {
     font-size: 1rem;
     color: #333;
 }
-
 /* Windows XP About Me Section */
 .sidebar-about {
     background: #ece9d8;
@@ -487,7 +291,6 @@ body.windows-xp-theme {
     height: 32px;
     image-rendering: pixelated;
 }
-
 /* Windows XP Styling */
 .windows-xp-theme {
     background-color: #f2f0e4;
@@ -531,7 +334,6 @@ body.windows-xp-theme {
 .xp-social-icon:hover {
     transform: scale(1.2);
 }
-
 /* Sidebar Mobile Toggle */
 .sidebar-content {
     display: block;
@@ -547,7 +349,6 @@ body.windows-xp-theme {
         display: block;
     }
 }
-
 /* Animations */
 .author-image-container {
     transition: transform 0.3s ease;
@@ -571,7 +372,6 @@ body.windows-xp-theme {
         transform: scale(1.05);
     }
 }
-
 /* Windows XP Footer */
 .windows-xp-old-footer {
     margin-top: 12px;

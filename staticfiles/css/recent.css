@@ -1,0 +1,40 @@
+/* Recent Posts and Category Posts */
+.recent-posts .card,
+.category-section .card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure cards take full height */
+}
+
+.recent-posts .card-img-top,
+.category-section .card-img-top {
+    width: 100%;
+    height: 200px; /* Fixed height for images */
+    object-fit: cover; /* Ensure images fill the space */
+}
+
+.recent-posts .card-body,
+.category-section .card-body {
+    flex: 1; /* Allow card body to grow and fill space */
+    display: flex;
+    flex-direction: column;
+}
+
+.recent-posts .card-title,
+.category-section .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.recent-posts .card-text,
+.category-section .card-text {
+    font-size: 0.9rem;
+}
+
+.recent-posts .btn-primary,
+.category-section .btn-primary {
+    margin-top: auto; /* Push button to the bottom */
+}

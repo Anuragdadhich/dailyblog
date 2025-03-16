@@ -1,0 +1,37 @@
+/* Post Detail Page */
+.post-detail-container {
+    padding: 20px;
+}
+
+.post-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0078d7; /* Windows XP blue */
+}
+
+.post-meta {
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.post-meta .author {
+    font-weight: bold;
+}
+
+.post-meta .published-date {
+    margin-left: 10px;
+}
+
+.post-image {
+    width: 100%;
+    height: auto;
+    border: 2px solid #0078d7; /* Windows XP blue */
+    margin-bottom: 20px;
+}
+
+.post-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}

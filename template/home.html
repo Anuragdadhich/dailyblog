@@ -17,7 +17,7 @@
                                 <img src="https://via.placeholder.com/600x400" class="img-fluid rounded-start" alt="Placeholder">
                             {% endif %}
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <div class="card-body">
                                 <h2 class="card-title">{{ post.title }}</h2>
                                 <p class="card-text">{{ post.content|safe|truncatewords:20 }}</p>
@@ -120,7 +120,7 @@
                                                 <div class="card-body">
                                                     <h5 class="card-title">{{ post.title }}</h5>
                                                     <p class="card-text">{{ post.content|safe|truncatewords:20 }}</p>
-                                                    <a href="" class="btn btn-primary">Read More</a>
+                                                    <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read More</a>
                                                 </div>
                                             </div>
                                         </div>
