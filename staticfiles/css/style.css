@@ -470,7 +470,7 @@ body.windows-xp-theme {
 /* Windows XP Styling */
 .windows-xp-theme {
     background-color: #f2f0e4;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Robotos', sans-serif;
 }
 
 .win-xp-box {
@@ -489,10 +489,10 @@ body.windows-xp-theme {
     margin-bottom: 10px;
 }
 
-.win-xp-text {
-    color: #000000;
-    line-height: 1.3;
-    font-size: 0.9rem;
+.win-xp-texts {
+    color: #201f1f;
+    line-height: 1.7;
+    font-size: 1.1rem;
 }
 
 .xp-social-links {
