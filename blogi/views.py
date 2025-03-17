@@ -4,6 +4,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Post, Category  # Import models
 from django.db.models import Count
 from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 def home(request):
     # Fetch all categories with their posts (limit to 4 posts per category)
     categories = Category.objects.annotate(post_count=Count('post'))
@@ -13,30 +15,36 @@ def home(request):
         category_posts.append({
             'category': category,
             'posts': posts,
-           
         })
 
-    # Fetch recent posts (optional)
-    recent_posts = Post.objects.order_by('-published_date')[:4]
+    # Fetch recent posts (full queryset for pagination)
+    recent_posts = Post.objects.order_by('-published_date')
+
+    # Paginate recent posts
+    paginator = Paginator(recent_posts, 6)  # Show 4 posts per page
+    page_number = request.GET.get('page')  # Get the current page number from the URL
+    try:
+        page_obj = paginator.page(page_number)  # Get the current page
+    except PageNotAnInteger:
+        page_obj = paginator.page(1)  # Default to the first page
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)  # Deliver the last page if page is out of range
 
     # Fetch popular posts (optional)
     popular_posts = Post.objects.order_by('-views')[:7]
 
     # Fetch featured posts (optional)
     featured_posts = Post.objects.filter(featured=True)[:3]
-    paginator = Paginator(recent_posts, 4)
-    page_number = request.GET.get('page')  # Get the current page number from the URL
-    page_obj = paginator.get_page(page_number)  
+
     context = {
         'categories': categories, 
         'category_posts': category_posts,  # List of categories with their posts
-        'recent_posts': recent_posts,
+        'recent_posts': page_obj,  # Use paginated recent posts
         'popular_posts': popular_posts,
         'featured_posts': featured_posts,
-         'page_obj': page_obj
+        'page_obj': page_obj,  # Pass the paginator object to the template
     }
     return render(request, 'home.html', context)
-
 def category_posts(request, slug):
     categories = Category.objects.all() 
     category = get_object_or_404(Category, slug=slug)
