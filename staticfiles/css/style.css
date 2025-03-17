@@ -450,16 +450,17 @@ body.windows-xp-theme {
 
 .win-xp-title {
     color: #003399;
-    font-size: 1.2rem;
+    font-size: 1.7rem;
     font-weight: bold;
     margin-bottom: 10px;
     text-shadow: 1px 1px 0px white;
 }
 
 .win-xp-text {
-    color: #1a1a1a;
-    font-size:1rem;
-    line-height: 1.8;
+    color: #050505;
+    font-size:1.1rem;
+    line-height: 1.7;
+    font-weight: 500;
     margin: 0;
 }
 
