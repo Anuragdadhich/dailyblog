@@ -1,0 +1,308 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Live Scorecard - Daily Blog{% endblock %}
+
+{% block content %}
+<style>
+    :root {
+        --background-light: #ffffff;
+        --background-dark: #1a1a1a;
+        --text-light: #333333;
+        --text-dark: #f8f9fa;
+        --card-light: #ffffff;
+        --card-dark: #2d2d2d;
+        --border-light: #e0e0e0;
+        --border-dark: #444444;
+        --button-light: #0078d7;
+        --button-dark: #005bb5;
+        --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --shadow-dark: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark-mode {
+        background: var(--background-dark);
+        color: var(--text-dark);
+    }
+
+    .score-container {
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .score-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .team {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .team-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+    .score {
+        text-align: center;
+    }
+
+    .score h2 {
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    .score p {
+        font-size: 1rem;
+        margin: 0;
+    }
+
+    .score-card {
+        background: var(--card-light);
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: var(--shadow-light);
+        margin-bottom: 20px;
+    }
+
+    body.dark-mode .score-card {
+        background: var(--card-dark);
+        box-shadow: var(--shadow-dark);
+    }
+
+    .score-card h3 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: var(--text-light);
+    }
+
+    body.dark-mode .score-card h3 {
+        color: var(--text-dark);
+    }
+
+    .score-card p {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        margin-bottom: 10px;
+    }
+
+    body.dark-mode .score-card p {
+        color: var(--text-dark);
+    }
+
+    .batsmen-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    .batsmen-table th, .batsmen-table td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid var(--border-light);
+        font-size: 0.9rem;
+    }
+
+    body.dark-mode .batsmen-table th, body.dark-mode .batsmen-table td {
+        border-bottom: 1px solid var(--border-dark);
+    }
+
+    .batsmen-table th {
+        font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+        .team-icon {
+            width: 30px;
+            height: 30px;
+        }
+
+        .score h2 {
+            font-size: 1.25rem;
+        }
+
+        .score p {
+            font-size: 0.9rem;
+        }
+
+        .score-card {
+            padding: 15px;
+        }
+
+        .score-card h3 {
+            font-size: 1.1rem;
+        }
+
+        .score-card p {
+            font-size: 0.8rem;
+        }
+
+        .batsmen-table th, .batsmen-table td {
+            padding: 6px;
+            font-size: 0.8rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .team-icon {
+            width: 25px;
+            height: 25px;
+        }
+
+        .score h2 {
+            font-size: 1rem;
+        }
+
+        .score p {
+            font-size: 0.8rem;
+        }
+
+        .score-card h3 {
+            font-size: 1rem;
+        }
+
+        .score-card p {
+            font-size: 0.75rem;
+        }
+
+        .batsmen-table th, .batsmen-table td {
+            padding: 4px;
+            font-size: 0.75rem;
+        }
+    }
+</style>
+
+<div class="score-container">
+    <!-- Score Header -->
+    <div class="score-header">
+        <div class="team">
+            <img src="{% static 'images/mi.png' %}" alt="Mumbai Indians" class="team-icon">
+            <span id="team1-name">Mumbai Indians</span>
+        </div>
+        <div class="score">
+            <h2 id="team1-score">0/0 (0)</h2>
+            <p>vs</p>
+            <h2 id="team2-score">0/0 (0)</h2>
+        </div>
+        <div class="team">
+            <img src="{% static 'images/csk.png' %}" alt="Chennai Super Kings" class="team-icon">
+            <span id="team2-name">Chennai Super Kings</span>
+        </div>
+    </div>
+
+    <!-- Live Scorecard -->
+    <div class="score-card">
+        <h3>Live Scorecard</h3>
+        <p><strong>Status:</strong> <span id="match-status">Match not started</span></p>
+        <p><strong>Venue:</strong> <span id="match-venue">Wankhede Stadium, Mumbai</span></p>
+        <p><strong>Toss:</strong> <span id="match-toss">Mumbai Indians elected to bat</span></p>
+    </div>
+
+    <!-- Team Batters Info -->
+    <div class="score-card">
+        <h3 id="batsmen-team1">Mumbai Indians Batters</h3>
+        <table class="batsmen-table" id="batsmen-table-team1">
+            <thead>
+                <tr>
+                    <th>Batsman</th>
+                    <th>Runs</th>
+                    <th>Balls</th>
+                    <th>4s</th>
+                    <th>6s</th>
+                    <th>SR</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be populated dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="score-card">
+        <h3 id="batsmen-team2">Chennai Super Kings Batters</h3>
+        <table class="batsmen-table" id="batsmen-table-team2">
+            <thead>
+                <tr>
+                    <th>Batsman</th>
+                    <th>Runs</th>
+                    <th>Balls</th>
+                    <th>4s</th>
+                    <th>6s</th>
+                    <th>SR</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be populated dynamically -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- JavaScript for Live Updates -->
+<script>
+    const apiKey = "YOUR_CRICAPI_KEY"; // Replace with your API key
+    const apiUrl = `https://cricapi.com/api/cricketScore?apikey=${apiKey}`;
+
+    // Function to fetch live data
+    async function fetchLiveData() {
+        try {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+
+            // Update match info
+            document.getElementById("team1-name").textContent = data.team1;
+            document.getElementById("team2-name").textContent = data.team2;
+            document.getElementById("team1-score").textContent = data.score.split(" v ")[0];
+            document.getElementById("team2-score").textContent = data.score.split(" v ")[1];
+            document.getElementById("match-status").textContent = data.status;
+            document.getElementById("match-venue").textContent = data.venue;
+            document.getElementById("match-toss").textContent = data.toss;
+
+            // Update batters' info (example)
+            updateBattersTable("batsmen-table-team1", [
+                { name: "Rohit Sharma", runs: 68, balls: 45, fours: 6, sixes: 3, sr: 151.11 },
+                { name: "Ishan Kishan", runs: 42, balls: 30, fours: 4, sixes: 2, sr: 140.00 },
+            ]);
+
+            updateBattersTable("batsmen-table-team2", [
+                { name: "Ruturaj Gaikwad", runs: 50, balls: 35, fours: 5, sixes: 2, sr: 142.85 },
+                { name: "Devon Conway", runs: 45, balls: 30, fours: 4, sixes: 1, sr: 150.00 },
+            ]);
+        } catch (error) {
+            console.error("Error fetching live data:", error);
+        }
+    }
+
+    // Function to update batters' table
+    function updateBattersTable(tableId, batters) {
+        const tableBody = document.querySelector(`#${tableId} tbody`);
+        tableBody.innerHTML = ""; // Clear existing rows
+
+        batters.forEach(batsman => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${batsman.name}</td>
+                <td>${batsman.runs}</td>
+                <td>${batsman.balls}</td>
+                <td>${batsman.fours}</td>
+                <td>${batsman.sixes}</td>
+                <td>${batsman.sr}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    // Fetch data every 30 seconds
+    setInterval(fetchLiveData, 30000);
+    fetchLiveData(); // Initial call
+</script>
+{% endblock %}

@@ -3,157 +3,357 @@
 {% block title %}Home - Daily Blog{% endblock %}
 
 {% block content %}
-<div class="container-fluid home-container">
+<style>
+    :root {
+        --background-light: #ffffff;
+        --background-dark: #1a1a1a;
+        --text-light: #333333;
+        --text-dark: #f8f9fa;
+        --card-light: #ffffff;
+        --card-dark: #2d2d2d;
+        --border-light: #e0e0e0;
+        --border-dark: #444444;
+        --button-light: #0078d7;
+        --button-dark: #005bb5;
+        --pagination-light: #0078d7;
+        --pagination-dark: #005bb5;
+        --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --shadow-dark: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark-mode {
+        background: var(--background-dark);
+        color: var(--text-dark);
+    }
+
+    .home-container {
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .post-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .post-card {
+        background: var(--card-light);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: var(--shadow-light);
+    }
+
+    body.dark-mode .post-card {
+        background: var(--card-dark);
+        box-shadow: var(--shadow-dark);
+    }
+
+    .post-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .post-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .post-card-content {
+        padding: 20px;
+    }
+
+    .post-card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: var(--text-light);
+    }
+
+    body.dark-mode .post-card-title {
+        color: var(--text-dark);
+    }
+
+    .post-card-excerpt {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        margin-bottom: 15px;
+    }
+
+    body.dark-mode .post-card-excerpt {
+        color: var(--text-dark);
+    }
+
+    .post-card-meta {
+        font-size: 0.8rem;
+        color: #666666;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    body.dark-mode .post-card-meta {
+        color: #888888;
+    }
+
+    .post-card-meta i {
+        font-size: 0.9rem;
+    }
+
+    .post-card-link {
+        display: inline-block;
+        padding: 8px 16px;
+        background: var(--button-light);
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        transition: background 0.3s;
+    }
+
+    body.dark-mode .post-card-link {
+        background: var(--button-dark);
+    }
+
+    .post-card-link:hover {
+        opacity: 0.9;
+    }
+
+    .category-card {
+        background: var(--card-light);
+        border-radius: 8px;
+        padding: 20px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        box-shadow: var(--shadow-light);
+    }
+
+    body.dark-mode .category-card {
+        background: var(--card-dark);
+        box-shadow: var(--shadow-dark);
+    }
+
+    .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .category-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: var(--text-light);
+    }
+
+    body.dark-mode .category-title {
+        color: var(--text-dark);
+    }
+
+    .category-post {
+        margin-bottom: 10px;
+    }
+
+    .category-post-title {
+        font-size: 1rem;
+        font-weight: bold;
+        color: var(--text-light);
+    }
+
+    body.dark-mode .category-post-title {
+        color: var(--text-dark);
+    }
+
+    .category-post-meta {
+        font-size: 0.8rem;
+        color: #666666;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    body.dark-mode .category-post-meta {
+        color: #888888;
+    }
+
+    .category-post-meta i {
+        font-size: 0.9rem;
+    }
+
+    .today-date-time {
+        font-size: 1rem;
+        color: var(--text-light);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    body.dark-mode .today-date-time {
+        color: var(--text-dark);
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .pagination-link {
+        padding: 8px 16px;
+        background: var(--pagination-light);
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        transition: background 0.3s;
+    }
+
+    body.dark-mode .pagination-link {
+        background: var(--pagination-dark);
+    }
+
+    .pagination-link:hover {
+        opacity: 0.9;
+    }
+
+    .pagination-current {
+        padding: 8px 16px;
+        background: var(--pagination-light);
+        color: #ffffff;
+        border-radius: 4px;
+        font-size: 0.9rem;
+    }
+
+    body.dark-mode .pagination-current {
+        background: var(--pagination-dark);
+    }
+
+    @media (max-width: 768px) {
+        .post-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .post-card img {
+            height: 150px;
+        }
+    }
+</style>
+
+<div class="home-container">
+    <!-- Today's Date and Time -->
+    <div class="today-date-time">
+        <i class="fas fa-calendar-alt"></i>
+        <span id="today-date"></span>
+        <i class="fas fa-clock"></i>
+        <span id="today-time"></span>
+    </div>
+
     <!-- Featured Post -->
     {% if featured_posts %}
-        <div class="featured-post mb-5">
-            {% with post=featured_posts.0 %}
-                <div class="card">
-                    <div class="featured-image-container" style="height: 300px; overflow: hidden;">
-                        {% if post.image %}
-                            <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}" style="width: 100%; height: 100%; object-fit: cover;">
-                        {% else %}
-                            <img src="https://via.placeholder.com/600x400" class="card-img-top" alt="Placeholder" style="width: 100%; height: 100%; object-fit: cover;">
-                        {% endif %}
-                    </div>
-                    <div class="card-body">
-                        <h2 class="card-title">{{ post.title }}</h2>
-                        <p class="card-text">{{ post.content|striptags|safe|truncatewords:20 }}</p>
-                        <p class="text-muted">Published on: {{ post.published_date|date:"F j, Y" }}</p>
-                        <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read More</a>
-                    </div>
-                </div>
-            {% endwith %}
+    <div class="featured-post mb-4">
+        {% with post=featured_posts.0 %}
+        <div class="post-card">
+            {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}">
+            {% else %}
+            <img src="https://via.placeholder.com/800x400" alt="Placeholder">
+            {% endif %}
+            <div class="post-card-content">
+                <h2 class="post-card-title">{{ post.title }}</h2>
+                <p class="post-card-excerpt">{{ post.content|striptags|safe|truncatewords:30 }}</p>
+                <p class="post-card-meta">
+                    <i class="fas fa-calendar-alt"></i> {{ post.published_date|date:"F j, Y" }}
+                    <i class="fas fa-clock"></i> {{ post.published_date|date:"g:i a" }}
+                </p>
+                <a href="{% url 'post_detail' post.slug %}" class="post-card-link">Read More</a>
+            </div>
         </div>
+        {% endwith %}
+    </div>
     {% endif %}
 
-    <!-- Divider -->
-    <hr class="divider">
-
     <!-- Recent Posts -->
-    <h2 class="mb-4">Recent Posts</h2>
-    <div class="row recent-posts">
+    <h2 class="mb-3">Recent Posts</h2>
+    <div class="post-grid">
         {% for post in page_obj %}
-            <div class="col-md-4 mb-4">
-                <div class="card small-post">
-                    <div class="card-image-container" style="height: 200px; overflow: hidden;">
-                        {% if post.image %}
-                            <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}" style="width: 100%; height: 100%; object-fit: cover;">
-                        {% else %}
-                            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Placeholder" style="width: 100%; height: 100%; object-fit: cover;">
-                        {% endif %}
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ post.title }}</h5>
-                        <p class="card-text">{{ post.content|striptags|safe|truncatewords:20 }}</p>
-                
-                        <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read More</a>
-                    </div>
-                </div>
+        <div class="post-card">
+            {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}">
+            {% else %}
+            <img src="https://via.placeholder.com/400x300" alt="Placeholder">
+            {% endif %}
+            <div class="post-card-content">
+                <h3 class="post-card-title">{{ post.title }}</h3>
+                <p class="post-card-excerpt">{{ post.content|striptags|safe|truncatewords:20 }}</p>
+                <p class="post-card-meta">
+                    <i class="fas fa-calendar-alt"></i> {{ post.published_date|date:"F j, Y" }}
+                    <i class="fas fa-clock"></i> {{ post.published_date|date:"g:i a" }}
+                </p>
+                <a href="{% url 'post_detail' post.slug %}" class="post-card-link">Read More</a>
             </div>
+        </div>
         {% empty %}
-            <div class="col-12">
-                <p>No recent posts available.</p>
-            </div>
+        <p class="text-muted">No recent posts available.</p>
         {% endfor %}
     </div>
 
-    <!-- Pagination Controls -->
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center win-xp-pagination">
-            {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link win-xp-button" href="?page=1" aria-label="First">
-                        &laquo; First
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link win-xp-button" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                        Previous
-                    </a>
-                </li>
-            {% endif %}
+    <!-- Pagination -->
+    <nav class="pagination">
+        {% if page_obj.has_previous %}
+        <a href="?page=1" class="pagination-link">&laquo; First</a>
+        <a href="?page={{ page_obj.previous_page_number }}" class="pagination-link">Previous</a>
+        {% endif %}
 
-            <li class="page-item disabled">
-                <span class="page-link win-xp-text">
-                    Page <span aria-current="page">{{ page_obj.number }}</span> of {{ page_obj.paginator.num_pages }}
-                </span>
-            </li>
+        <span class="pagination-current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
 
-            {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link win-xp-button" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                        Next
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link win-xp-button" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
-                        Last &raquo;
-                    </a>
-                </li>
-            {% endif %}
-        </ul>
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="pagination-link">Next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}" class="pagination-link">Last &raquo;</a>
+        {% endif %}
     </nav>
 
-    <!-- Divider -->
-    <hr class="divider">
-
     <!-- Categories -->
-    <h2 class="mb-4">Categories</h2>
-    <div class="row">
+    <h2 class="mt-5 mb-3">Categories</h2>
+    <div class="post-grid">
         {% for category in categories %}
-            <div class="col-md-12 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">{{ category.name }}</h3>
-                        <div class="row">
-                            <!-- Large Post -->
-                            {% with post=category.post_set.first %}
-                                {% if post %}
-                                    <div class="col-md-12 mb-3">
-                                        <div class="card">
-                                            <div class="card-image-container" style="height: 300px; overflow: hidden;">
-                                                {% if post.image %}
-                                                    <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}" style="width: 100%; height: 100%; object-fit: cover;">
-                                                {% else %}
-                                                    <img src="https://via.placeholder.com/600x400" class="card-img-top" alt="Placeholder" style="width: 100%; height: 100%; object-fit: cover;">
-                                                {% endif %}
-                                            </div>
-                                            <div class="card-body">
-                                                <h2 class="card-title">{{ post.title }}</h2>
-                                                <p class="card-text">{{ post.content|safe|truncatewords:20 }}</p>
-                                                <p class="text-muted">Published on: {{ post.published_date|date:"F j, Y" }}</p>
-                                                <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            {% endwith %}
-                           
-                            <!-- Small Posts -->
-                            {% for post in category.post_set.all|slice:"1:4" %}
-                                <div class="col-md-6 mb-3">
-                                    <div class="card small-post">
-                                        <div class="card-body">
-                                            <h6 class="card-title">{{ post.title }}</h6>
-                                            <a href="{% url 'post_detail' post.slug %}" class="btn btn-sm btn-outline-primary">Read More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% empty %}
-                                <div class="col-12">
-                                    <p>No posts available in this category.</p>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
+        <div class="category-card">
+            <h3 class="category-title">{{ category.name }}</h3>
+            <div class="category-posts">
+                {% for post in category.post_set.all|slice:":3" %}
+                <div class="category-post">
+                    <h4 class="category-post-title">{{ post.title }}</h4>
+                    <p class="category-post-meta">
+                        <i class="fas fa-calendar-alt"></i> {{ post.published_date|date:"F j, Y" }}
+                        <i class="fas fa-clock"></i> {{ post.published_date|date:"g:i a" }}
+                    </p>
                 </div>
+                {% endfor %}
             </div>
-        {% empty %}
-            <div class="col-12">
-                <p>No categories available.</p>
-            </div>
+        </div>
         {% endfor %}
     </div>
 </div>
+
+<!-- Today's Date and Time Script -->
+<script>
+    function updateDateTime() {
+        const today = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const dateString = today.toLocaleDateString(undefined, options);
+        const timeString = today.toLocaleTimeString();
+
+        document.getElementById('today-date').textContent = dateString;
+        document.getElementById('today-time').textContent = timeString;
+    }
+
+    // Update date and time every second
+    setInterval(updateDateTime, 1000);
+    updateDateTime(); // Initial call
+</script>
 {% endblock %}

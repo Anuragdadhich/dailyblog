@@ -3,111 +3,326 @@
 {% block title %}{{ post.title }} - Daily Blog{% endblock %}
 
 {% block content %}
-<div class="container-fluid post-detail-container windows-xp-theme">
+<style>
+    .post-detail-container {
+        padding: 10px;
+        transition: background 0.3s, color 0.3s;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode .post-detail-container {
+        background: var(--background-dark);
+        color: var(--text-dark);
+    }
+
+    .win-xp-title {
+        font-family: 'Tahoma', 'Verdana', sans-serif;
+        color: var(--xp-blue);
+        border-bottom: 2px solid var(--xp-dark-grey);
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    body.dark-mode .win-xp-title {
+        color: var(--xp-red);
+    }
+
+    .win-xp-meta {
+        color: var(--xp-dark-grey);
+        font-size: 0.9rem;
+        margin: 15px 0;
+    }
+
+    body.dark-mode .win-xp-meta {
+        color: #888;
+    }
+
+    .win-xp-image {
+        border: var(--xp-border);
+        margin: 20px 0;
+        max-height: 500px;
+        object-fit: cover;
+    }
+
+    .win-xp-text {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin: 25px 0;
+    }
+
+    body.dark-mode .win-xp-text {
+        color: #e0e0e0;
+    }
+
+    .win-xp-social {
+        margin: 30px 0;
+        padding: 20px;
+        background: var(--background-light);
+        border: var(--xp-border);
+    }
+
+    body.dark-mode .win-xp-social {
+        background: var(--card-dark);
+    }
+
+    .social-icon {
+        font-size: 2rem;
+        margin: 0 10px;
+        color: var(--xp-blue);
+        transition: transform 0.3s;
+    }
+
+    body.dark-mode .social-icon {
+        color: var(--xp-red);
+    }
+
+    .social-icon:hover {
+        transform: translateY(-3px);
+    }
+
+    .win-xp-button {
+        background: var(--xp-button);
+        border: 1px solid #808080;
+        padding: 8px 20px;
+        font-size: 0.9rem;
+    }
+
+    .win-xp-card {
+        background: var(--card-light);
+        border: var(--xp-border);
+        margin: 10px;
+    }
+
+    body.dark-mode .win-xp-card {
+        background: var(--card-dark);
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: var(--xp-blue);
+        padding: 15px;
+        border-radius: 50%;
+    }
+
+    body.dark-mode .carousel-control-prev-icon,
+    body.dark-mode .carousel-control-next-icon {
+        background-color: var(--xp-red);
+    }
+
+    /* Reading Progress Bar */
+    .reading-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: var(--xp-blue);
+        z-index: 9999;
+        transition: width 0.2s;
+    }
+
+    body.dark-mode .reading-progress {
+        background: var(--xp-red);
+    }
+
+    /* Table of Contents */
+    .toc-container {
+        position: sticky;
+        top: 100px;
+        background: var(--background-light);
+        border: var(--xp-border);
+        padding: 15px;
+        margin-left: 30px;
+    }
+
+    body.dark-mode .toc-container {
+        background: var(--card-dark);
+    }
+
+    /* Related Posts List */
+    .related-posts-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .related-posts-list li {
+        margin: 10px 0;
+        padding: 10px;
+        border: var(--xp-border);
+        background: var(--card-light);
+    }
+
+    body.dark-mode .related-posts-list li {
+        background: var(--card-dark);
+    }
+
+    .related-posts-list a {
+        color: var(--text-light);
+        text-decoration: none;
+    }
+
+    body.dark-mode .related-posts-list a {
+        color: var(--text-dark);
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        background: var(--xp-blue);
+        border: none;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    body.dark-mode .back-to-top {
+        background: var(--xp-red);
+    }
+
+    .back-to-top i {
+        color: #FFF;
+    }
+
+    @media (max-width: 768px) {
+        .toc-container {
+            display: none;
+        }
+
+        .win-xp-image {
+            max-height: 300px;
+        }
+
+        .win-xp-text {
+            font-size: 1rem;
+        }
+    }
+</style>
+
+<!-- Reading Progress Bar -->
+<div class="reading-progress" style="width: 0%"></div>
+
+<div class="container post-detail-container windows-xp-theme">
+    <!-- Table of Contents -->
+    {% if post.toc %}
+    <div class="toc-container d-none d-lg-block">
+        <h4>📚 Table of Contents</h4>
+        {{ post.toc|safe }}
+    </div>
+    {% endif %}
+
     <!-- Post Detail -->
-    <div class="row">
+    <div class="row justify-content-center">
         <!-- Main Post Content -->
-        <div class="col-md-8">
+        <div class="col-lg-8 col-md-10">
             <!-- Post Title -->
-            <h1 class="post-title win-xp-title mb-2">{{ post.title }}</h1>
+            <h1 class="post-title win-xp-title mb-2 text-center">{{ post.title }}</h1>
 
             <!-- Post Meta -->
-            <div class="post-meta win-xp-meta">
+            <div class="post-meta win-xp-meta text-center">
                 <span class="author">👤 By {{ post.author.username }}</span>
                 <span class="published-date">📅 Published on: {{ post.published_date|date:"F j, Y, g:i a" }}</span>
+                <span class="reading-time">⏱️ {{ post.reading_time }} min read</span>
+            </div>
+
+            <!-- Post Tags -->
+            <div class="post-tags text-center mt-3">
+                {% for tag in post.tags.all %}
+                <span class="badge bg-secondary me-1">{{ tag.name }}</span>
+                {% endfor %}
             </div>
 
             <!-- Post Image -->
             {% if post.image %}
-                <img src="{{ post.image.url }}" class="img-fluid post-image win-xp-image" alt="{{ post.title }}">
+            <img src="{{ post.image.url }}" class="img-fluid post-image win-xp-image" alt="{{ post.title }}">
             {% else %}
-                <img src="https://via.placeholder.com/800x400" class="img-fluid post-image win-xp-image" alt="Placeholder">
+            <img src="https://via.placeholder.com/800x400" class="img-fluid post-image win-xp-image" alt="Placeholder">
             {% endif %}
 
             <!-- Post Content -->
             <div class="post-content win-xp-text">
-                {{ post.content| safe|linebreaks }}
+                {{ post.content|safe }}
             </div>
 
-            <!-- Social Icons with Share Functionality -->
-            <div class="social-icons win-xp-social">
-                <h3>📤 Share this post:</h3>
-                {% with post_url=request.build_absolute_uri %}  
-                    <!-- Facebook -->
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ post_url }}" 
-                       class="social-icon" 
-                       target="_blank" 
-                       title="Share on Facebook">
-                        <i class="fab fa-facebook"></i>
-                    </a>
-
-                    <!-- Twitter -->
-                    <a href="https://twitter.com/intent/tweet?url={{ post_url }}&text={{ post.title }}" 
-                       class="social-icon" 
-                       target="_blank" 
-                       title="Share on Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-
-                    <!-- LinkedIn -->
-                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ post_url }}" 
-                       class="social-icon" 
-                       target="_blank" 
-                       title="Share on LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-
-                    <!-- WhatsApp -->
-                    <a href="https://api.whatsapp.com/send?text={{ post.title }} - {{ post_url }}" 
-                       class="social-icon" 
-                       target="_blank" 
-                       title="Share on WhatsApp">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
+            <!-- Social Sharing -->
+            <div class="social-icons win-xp-social text-center">
+                <h3>Share this post:</h3>
+                {% with post_url=request.build_absolute_uri %}
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ post_url }}" class="social-icon" target="_blank" title="Share on Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://twitter.com/intent/tweet?url={{ post_url }}&text={{ post.title }}" class="social-icon" target="_blank" title="Share on Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ post_url }}" class="social-icon" target="_blank" title="Share on LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://api.whatsapp.com/send?text={{ post.title }} - {{ post_url }}" class="social-icon" target="_blank" title="Share on WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
                 {% endwith %}
             </div>
 
-            <!-- Back to Home Button -->
-            <div class="text-center mt-5">
-                <a href="{% url 'home' %}" class="btn btn-primary win-xp-button">
-                     Back to Home
+            <!-- Navigation Buttons -->
+            <div class="d-flex justify-content-between mt-5">
+                {% if previous_post %}
+                <a href="{% url 'post_detail' previous_post.slug %}" class="btn btn-primary win-xp-button">
+                    ← Previous Post
                 </a>
-            </div>
-        </div>
-
-        <!-- Sidebar -->
-        <div class="col-md-4">
-            <!-- Related Posts -->
-            <div class="related-posts win-xp-box">
-                <h3 class="win-xp-title"> Related Posts</h3>
-                {% for related_post in related_posts %}
-                    <div class="card mb-3 win-xp-card">
-                        {% if related_post.image %}
-                            <img src="{{ related_post.image.url }}" class="card-img-top win-xp-image" alt="{{ related_post.title }}">
-                        {% else %}
-                            <img src="https://via.placeholder.com/300x200" class="card-img-top win-xp-image" alt="Placeholder">
-                        {% endif %}
-                        <div class="card-body">
-                            <h5 class="card-title win-xp-subtitle">{{ related_post.title }}</h5>
-                            <p class="card-text win-xp-text">{{ related_post.content| safe|truncatewords:20 }}</p>
-                            <a href="{% url 'post_detail' related_post.slug %}" class="btn btn-primary win-xp-button">
-                                📖 Read More
-                            </a>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-
-            <!-- Retro Ad Block -->
-            <div class="retro-ad win-xp-box mt-4">
-                <h3 class="win-xp-title"> Retro Ads</h3>
-                <div class="ad-content">
-                    <p class="win-xp-text">
-                        Upgrade your blog experience with our retro-themed tools! 🛠️
-                    </p>
-                </div>
+                {% endif %}
+                <a href="{% url 'home' %}" class="btn btn-primary win-xp-button">
+                    <- Home
+                </a>
+                {% if next_post %}
+                <a href="{% url 'post_detail' next_post.slug %}" class="btn btn-primary win-xp-button">
+                    Next Post →
+                </a>
+                {% endif %}
             </div>
         </div>
     </div>
+
+    <!-- Related Posts -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-8 col-md-10">
+            <h3 class="win-xp-title text-center">Related Articles</h3>
+            <ul class="related-posts-list">
+                {% for related_post in related_posts %}
+                <li>
+                    <a href="{% url 'post_detail' related_post.slug %}">
+                        <h5>{{ related_post.title }}</h5>
+                        <small>👤 {{ related_post.author.username }} | 📅 {{ related_post.published_date|date:"F j, Y" }}</small>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </div>
+
+<!-- Back to Top Button -->
+<button class="back-to-top" aria-label="Back to Top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+    // Reading Progress Bar
+    window.addEventListener('scroll', function () {
+        const progressBar = document.querySelector('.reading-progress');
+        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (window.scrollY / windowHeight) * 100;
+        progressBar.style.width = scrolled + '%';
+    });
+
+    // Smooth Scroll for Table of Contents
+    document.querySelectorAll('.toc-container a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            target.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+</script>
 {% endblock %}

@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Post, Category  # Import models
 from django.db.models import Count
+import requests
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -88,3 +89,31 @@ def search(request):
     })
 def privacy(request):
     return render(request, "privacy.html")
+#1058580b-1dda-4fc3-affe-6e2768e04a38
+
+def ipl_page(request):
+    api_key = "1058580b-1dda-4fc3-affe-6e2768e04a38"
+    url = f"https://cricapi.com/api/matches?apikey={api_key}"
+    categories = Category.objects.all()
+    popular_posts = Post.objects.order_by('-views')[:5]
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        matches = response.json().get("matches", [])
+        
+        # Filter only IPL matches
+        ipl_matches = [match for match in matches if match.get("series", "") == "Indian Premier League"]
+        
+        # Alternatively, highlight IPL matches in the list of all matches
+        all_matches = matches
+    except requests.RequestException as e:
+        print(f"Error fetching data: {e}")
+        ipl_matches = []
+        all_matches = []
+
+    return render(request, 'ipl_page.html', {
+        'ipl_matches': ipl_matches,
+        'all_matches': all_matches,
+        'categories':categories,
+        'popular_posts':popular_posts
+    })

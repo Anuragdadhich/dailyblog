@@ -8,7 +8,7 @@ body.windows-xp-theme {
     background-color: #f0f0f0; /* Light gray background */
     color: #000;
     font-family: 'MS Sans Serif', sans-serif;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.6;
 }
 
@@ -450,17 +450,16 @@ body.windows-xp-theme {
 
 .win-xp-title {
     color: #003399;
-    font-size: 1.7rem;
+    font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 10px;
     text-shadow: 1px 1px 0px white;
 }
 
 .win-xp-text {
-    color: #050505;
-    font-size:1.1rem;
-    line-height: 1.7;
-    font-weight: 400;
+    color: #1a1a1a;
+    font-size: 0.9rem;
+    line-height: 1.4;
     margin: 0;
 }
 
@@ -491,7 +490,7 @@ body.windows-xp-theme {
 
 /* Windows XP Styling */
 .windows-xp-theme {
-    background-color: #f2f0e4;
+    background-color: #ffffff;
     font-family: 'Robotos', sans-serif;
 }
 
@@ -512,9 +511,9 @@ body.windows-xp-theme {
 }
 
 .win-xp-texts {
-    color: #201f1f;
-    line-height: 1.7;
-    font-size: 1.1rem;
+    color: #232222;
+    line-height: 1.8;
+    font-size: 1.2rem;
 }
 
 .xp-social-links {
@@ -631,3 +630,5 @@ body.windows-xp-theme {
     margin: 0;
     color: #333333; /* Dark gray text */
 }
+
+/*dark mode*/

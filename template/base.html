@@ -4,44 +4,277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daily Blog - Retro-styled technology blog featuring vintage computing articles and modern development insights">
+    <meta name="keywords" content="Windows XP, retro computing, vintage tech, programming blog, classic computing">
     <title>{% block title %}Daily Blog{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Windows XP CSS -->
+    <style>
+        :root {
+            --xp-blue: #0078D7;
+            --xp-red: #e74848;
+            --xp-grey: #ECE9D8;
+            --xp-dark-grey: #808080;
+            --xp-border: 2px inset #dfdfdf;
+            --background-light: #ECE9D8;
+            --background-dark: #000000;
+            --text-light: #000;
+            --text-dark: #FFF;
+            --sidebar-light: #ECE9D8;
+            --sidebar-dark: #1E1E1E;
+            --card-light: #FFF;
+            --card-dark: #333;
+            --navbar-light: linear-gradient(to bottom, var(--xp-blue), #005A9E);
+            --navbar-dark: linear-gradient(to bottom, #1E1E1E, #000000);
+            --footer-light: linear-gradient(to bottom, #ececec, #d6d6d6);
+            --footer-dark: linear-gradient(to bottom, #1E1E1E, #000000);
+        }
+
+        body {
+            font-family: 'Tahoma', 'Verdana', sans-serif;
+            background: var(--background-light);
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.4;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background: var(--background-dark);
+            color: var(--text-dark);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: var(--navbar-light);
+            border-bottom: 2px solid #003366;
+            transition: background 0.3s;
+        }
+
+        body.dark-mode .navbar {
+            background: var(--navbar-dark);
+            border-bottom: 2px solid var(--xp-red);
+        }
+
+        .navbar-brand, .nav-link {
+            color: #fff !important;
+            text-shadow: 1px 1px 1px #000;
+            font-size: 15px;
+        }
+
+        body.dark-mode .navbar-brand, body.dark-mode .nav-link {
+            color: var(--xp-red) !important;
+        }
+
+        .dropdown-menu {
+            border: var(--xp-border);
+            background: var(--background-light);
+        }
+
+        body.dark-mode .dropdown-menu {
+            background: var(--background-dark);
+            color: var(--text-dark);
+        }
+
+        /* Main Content Area */
+        .container-fluid {
+            padding: 15px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            flex: 0 0 250px;
+            background: var(--sidebar-light);
+            border-right: var(--xp-border);
+            padding: 15px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        body.dark-mode .sidebar {
+            background: var(--sidebar-dark);
+        }
+
+        .sidebar-content {
+            margin-top: 15px;
+        }
+
+        .list-group-item {
+            background: var(--card-light);
+            border: 1px solid var(--xp-dark-grey);
+            margin: 3px 0;
+            padding: 6px;
+            font-size: 12px;
+            transition: background 0.3s;
+        }
+
+        body.dark-mode .list-group-item {
+            background: var(--card-dark);
+            color: var(--text-dark);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 15px;
+        }
+
+        /* Buttons */
+        .btn {
+            background: linear-gradient(to bottom, #f3f3f3, #d6d6d6);
+            border: 1px solid #808080;
+            color: var(--text-light);
+            padding: 4px 8px;
+            font-size: 13px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-mode .btn {
+            background: linear-gradient(to bottom, #2D2D2D, #1E1E1E);
+            color: var(--text-dark);
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--xp-blue);
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        body.dark-mode .dark-mode-toggle {
+            background: var(--xp-red);
+        }
+
+        .dark-mode-toggle i {
+            color: #FFF;
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -250px;
+                top: 0;
+                width: 250px;
+                height: 100vh;
+                z-index: 1000;
+                transition: left 0.3s;
+            }
+
+            .sidebar.show {
+                left: 0;
+            }
+
+            #sidebarToggle {
+                position: fixed;
+                left: 10px;
+                top: 60px;
+                z-index: 1001;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--footer-light);
+            border-top: 2px solid #dfdfdf;
+            padding: 20px;
+            text-align: center;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-mode footer {
+            background: var(--footer-dark);
+            color: var(--text-dark);
+        }
+
+        .newsletter-footer {
+            background: var(--background-light);
+            padding: 20px;
+            text-align: center;
+            border-top: 2px solid var(--xp-dark-grey);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-mode .newsletter-footer {
+            background: var(--background-dark);
+            color: var(--text-dark);
+        }
+
+        .newsletter-footer input {
+            background: var(--background-light);
+            border: 1px solid var(--xp-dark-grey);
+            color: var(--text-light);
+            padding: 8px;
+            width: 70%;
+            margin-right: 10px;
+        }
+
+        body.dark-mode .newsletter-footer input {
+            background: var(--background-dark);
+            color: var(--text-dark);
+        }
+
+        .newsletter-footer button {
+            background: var(--xp-blue);
+            border: none;
+            color: #FFF;
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+
+        body.dark-mode .newsletter-footer button {
+            background: var(--xp-red);
+        }
+    </style>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8581421603188510" crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="windows-xp-theme">
-    <!-- Cursor Animation -->
-    <div class="custom-cursor"></div>
-
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}">Daily Blog</a>
+            <a class="navbar-brand" href="{% url 'home' %}" aria-label="Daily Blog Home">
+                <i class="fas fa-blog me-2"></i>Daily Blog
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        <a class="nav-link" href="{% url 'home' %}" aria-current="page">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'popular_posts' %}">Popular Posts</a>
+                        <a class="nav-link" href="{% url 'popular_posts' %}">Popular</a>
                     </li>
-                </ul>
-                <ul class="navbar-nav" style="margin-right: 20px;">
-                    <li class="nav-item dropdown" style="margin-right: 20px;">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Categories
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% for category in categories %}
-                                <li><a class="dropdown-item" href="{% url 'category_posts' category.slug %}">{{ category.name }}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'category_posts' category.slug %}">{{ category.name }}</a></li>
                             {% endfor %}
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <div class="category-posts">
+                            <a href="{% url 'ipl_page' %}" class="nav-link" >ipl 2025</a>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -50,130 +283,140 @@
 
     <!-- Main Content -->
     <div class="container-fluid">
-        <div class="row">
-            <!-- Main Content -->
-            <div class="col-md-9 order-sm-1 order-2" >
-                {% block content %}
-                <!-- Default content (can be overridden by child templates) -->
-                {% endblock %}
-            </div>
-
-            <!-- Sidebar -->
-            <div class="col-md-3 order-sm-2 order-1 mt-2 ">
-                <!-- Mobile Sidebar Toggle Button -->
-                <button class="btn btn-primary d-md-none mb-3" id="sidebarToggle">
-                    →
-                </button>
-
-                <!-- Sidebar Content -->
-                <div class="sidebar-content" id="sidebarContent">
-                    <!-- Search Form -->
-                    <form class="d-flex mt-2" action="{% url 'search' %}" method="GET" id="searchForm" onsubmit="return validateSearch(event)">
-                        <input class="form-control me-2" type="search" name="q" id="searchInput" placeholder="Search posts..." aria-label="Search" required>
-                        <button class="btn btn-outline-primary" type="submit">Search</button>
-                    </form>
-
-                    <!-- Ads Block -->
-                    <div class="ads-block mb-4 my-4 mx-2">
-                        <h3>Follow Us</h3>
-                        <div class="social-links">
-                            <a href="#" class="social-link">Facebook</a>
-                            <a href="#" class="social-link">Twitter</a>
-                            <a href="#" class="social-link">Instagram</a>
-                        </div>
+        <!-- Sidebar -->
+        <div class="sidebar ">
+            <button class="btn d-lg-none" id="sidebarToggle" aria-label="Toggle Sidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="sidebar-content">
+                <!-- Search Form -->
+                <form class="mb-3" action="{% url 'search' %}" method="GET" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="q" placeholder="Search..." aria-label="Search posts">
+                        <button class="btn" type="submit" aria-label="Submit search">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
+                </form>
 
-                    <!-- Popular Posts -->
-                    <h3>Popular Posts</h3>
-                    <ul class="list-group my-4">
+                <!-- Popular Posts -->
+                <div class="mb-3">
+                    <h4 class="h5">Popular Posts</h4>
+                    <ul class="list-group">
                         {% for post in popular_posts %}
-                            <li class="list-group-item">
-                                <a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a>
-                            </li>
+                        <li class="list-group-item">
+                            <a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a>
+                        </li>
                         {% endfor %}
                     </ul>
+                </div>
 
-                    <!-- About Me Section -->
-                    <div class="sidebar-about win-xp-box">
-                        {% block about %}
-                        <div class="author-box">
-                            <!-- Author Image with Animation -->
-                            <div class="author-image-container">
-                                <img src="{% static 'images/OIP.jpeg' %}" class="author-image" alt="Author Photo" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-                            </div>
-
-                            <!-- Author Bio -->
-                            <div class="author-info">
-                                <h3 class="win-xp-title">About Me</h3>
-                                <p class="win-xp-text">
-                                    🖥️ Vintage tech enthusiast<br>
-                                    📟 Blogger since 2013<br>
-                                    ☕ Coffee-powered coder<br>
-                                    🕹️ Retro computing collector
-                                </p>
-                            </div>
-                        </div>
-                        {% endblock about %}
+                <!-- About Section -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <img src="{% static 'images/OIP.jpeg' %}" class="img-fluid mb-2" alt="Author profile" loading="lazy">
+                        <h5 class="card-title">About Me</h5>
+                        <p class="card-text small">
+                            🖥️ Vintage tech enthusiast<br>
+                            📟 Blogger since 2013<br>
+                            ☕ Coffee-powered coder<br>
+                            🕹️ Retro computing collector
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            {% block content %}
+            <!-- Content goes here -->
+            {% endblock %}
+        </div>
     </div>
 
-    <!-- Footer Section -->
-    <footer class="windows-xp-old-footer py-4 ">
+    <!-- Newsletter Footer -->
+    <div class="newsletter-footer">
+        <h5 class="h6">Subscribe to Our Newsletter</h5>
+        <form action="#" method="post">
+            {% csrf_token %}
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+        <p class="small mt-2">Stay updated with the latest posts and news!</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
         <div class="container">
-            <div class="row text-center text-md-start">
-                <!-- Quick Links -->
-                <div class="col-12 col-md-4 mb-3">
-                    <h4 class="footer-title">Quick Links</h4>
-                    <ul class="footer-links list-unstyled">
-                        <li><a href="{% url 'home' %}" class="footer-link">🏠 Home</a></li>
-                        <li><a href="#" class="footer-link">📄 About</a></li>
-                        <li><a href="{% url 'privacy' %}" class="footer-link">🔒 Privacy Policy</a></li>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5 class="h6">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'home' %}" class="text-dark">Home</a></li>
+                        <li><a href="#" class="text-dark">About</a></li>
+                        <li><a href="{% url 'privacy' %}" class="text-dark">Privacy</a></li>
                     </ul>
                 </div>
-    
-                <!-- Social Media Links -->
-                <div class="col-12 col-md-4 mb-3">
-                    <h4 class="footer-title">Follow Us</h4>
-                    <div class="social-icons d-flex justify-content-center justify-content-md-start gap-3">
-                        <a href="https://facebook.com" class="social-icon" target="_blank" title="Facebook">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="https://twitter.com" class="social-icon" target="_blank" title="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://linkedin.com" class="social-icon" target="_blank" title="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://whatsapp.com" class="social-icon" target="_blank" title="WhatsApp">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
+                <div class="col-md-4 mb-3">
+                    <h5 class="h6">Follow Us</h5>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="text-dark" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-dark" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-dark" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-    
-                <!-- Copyright and Legal Info -->
-                <div class="col-12 col-md-4 mb-3">
-                    <h4 class="footer-title">Legal</h4>
-                    <p class="footer-text">
-                        &copy; 2025 Daily Blog. All rights reserved.<br>
-                        Designed retro enthusiasts.
-                    </p>
+                <div class="col-md-4">
+                    <p class="small mb-0">&copy; 2025 Daily Blog<br>
+                    Preserving digital heritage since 2013</p>
                 </div>
             </div>
         </div>
     </footer>
-    
+
+    <!-- Dark Mode Toggle Button -->
+    <button class="dark-mode-toggle" aria-label="Toggle Dark Mode" onclick="toggleDarkMode()">
+        <i class="fas fa-moon"></i>
+    </button>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS -->
-   
+    <!-- Sidebar Toggle -->
     <script>
         document.getElementById('sidebarToggle').addEventListener('click', function() {
-            const sidebarContent = document.getElementById('sidebarContent');
-            sidebarContent.classList.toggle('show');
+            document.querySelector('.sidebar').classList.toggle('show');
         });
+
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+
+            const darkModeToggle = document.querySelector('.dark-mode-toggle i');
+            if (isDarkMode) {
+                darkModeToggle.classList.remove('fa-moon');
+                darkModeToggle.classList.add('fa-sun');
+            } else {
+                darkModeToggle.classList.remove('fa-sun');
+                darkModeToggle.classList.add('fa-moon');
+            }
+        }
+
+        // Apply Dark Mode on Page Load
+        function applyDarkMode() {
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+                const darkModeToggle = document.querySelector('.dark-mode-toggle i');
+                darkModeToggle.classList.remove('fa-moon');
+                darkModeToggle.classList.add('fa-sun');
+            }
+        }
+
+        // Initialize Dark Mode
+        applyDarkMode();
     </script>
 </body>
 </html>

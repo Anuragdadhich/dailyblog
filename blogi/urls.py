@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home,category_posts,popular_posts,post_detail,search,privacy  # Import your view function
+from .views import home,category_posts,popular_posts,post_detail,search,privacy,ipl_page  # Import your view function
 
 
 urlpatterns = [
@@ -9,4 +9,5 @@ urlpatterns = [
     path('search/', search, name='search'),
     path('popular/', popular_posts, name='popular_posts'),
     path('privacy', privacy, name='privacy'),
+    path('ipl/', ipl_page, name='ipl_page'),
 ]
