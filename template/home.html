@@ -146,6 +146,14 @@
         font-weight: bold;
         margin-bottom: 15px;
         color: var(--text-light);
+        text-decoration: none   
+    }
+    .text-none {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: var(--text-light);
+        text-decoration: none   
     }
 
     body.dark-mode .category-title {
@@ -327,7 +335,7 @@
             <div class="category-posts">
                 {% for post in category.post_set.all|slice:":3" %}
                 <div class="category-post">
-                    <h4 class="category-post-title">{{ post.title }}</h4>
+                   <a class="text-none" href="{% url 'post_detail' post.slug %}"><h4 class="category-title">{{ post.title }}</h4></a>
                     <p class="category-post-meta">
                         <i class="fas fa-calendar-alt"></i> {{ post.published_date|date:"F j, Y" }}
                         <i class="fas fa-clock"></i> {{ post.published_date|date:"g:i a" }}
