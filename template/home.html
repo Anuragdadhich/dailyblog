@@ -21,6 +21,10 @@
         --shadow-dark: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
+    body {
+        overflow-x: hidden;
+    }
+
     body.dark-mode {
         background: var(--background-dark);
         color: var(--text-dark);
@@ -208,6 +212,7 @@
         justify-content: center;
         gap: 10px;
         margin-top: 20px;
+        flex-wrap: wrap;
     }
 
     .pagination-link {
@@ -248,6 +253,34 @@
         .post-card img {
             height: 150px;
         }
+
+        .pagination {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        background: var(--button-light);
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        transition: background 0.3s;
+        display: none;
+    }
+
+    body.dark-mode .back-to-top {
+        background: var(--button-dark);
+    }
+
+    .back-to-top:hover {
+        opacity: 0.9;
     }
 </style>
 
@@ -348,6 +381,8 @@
     </div>
 </div>
 
+
+
 <!-- Today's Date and Time Script -->
 <script>
     function updateDateTime() {
@@ -363,5 +398,14 @@
     // Update date and time every second
     setInterval(updateDateTime, 1000);
     updateDateTime(); // Initial call
+
+    // Back to Top Button Script
+    window.onscroll = function() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.querySelector('.back-to-top').style.display = 'block';
+        } else {
+            document.querySelector('.back-to-top').style.display = 'none';
+        }
+    };
 </script>
 {% endblock %}

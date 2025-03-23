@@ -156,7 +156,7 @@
         .dark-mode-toggle i {
             color: #FFF;
         }
-
+        
         /* Mobile Optimization */
         @media (max-width: 768px) {
             .sidebar {
@@ -271,11 +271,6 @@
                             {% endfor %}
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <div class="category-posts">
-                            <a href="{% url 'ipl_page' %}" class="nav-link" >ipl 2025</a>
-                        </div>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -332,6 +327,16 @@
             {% block content %}
             <!-- Content goes here -->
             {% endblock %}
+         
+
+            <!-- Work With Us Section -->
+            <div class="affiliate-section text-center">
+                <h3>Work With Us</h3>
+                <p>Interested in collaborating? Contact us now!</p>
+                <a href="#contact-form" class="btn">Contact Us</a>
+            </div>
+
+            
         </div>
     </div>
 
