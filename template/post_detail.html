@@ -8,6 +8,12 @@
         padding: 10px;
         transition: background 0.3s, color 0.3s;
     }
+    .post-content img{
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+    }
 
     /* Dark Mode Styles */
     body.dark-mode .post-detail-container {
@@ -243,7 +249,9 @@
 
             <!-- Post Content -->
             <div class="post-content win-xp-text">
-                {{ post.content|safe }}
+                
+                    {{ post.content | safe }}
+                
             </div>
 
             <!-- Social Sharing -->

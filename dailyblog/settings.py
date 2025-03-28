@@ -90,8 +90,15 @@ TINYMCE_DEFAULT_CONFIG = {
     'contextmenu': 'formats | link image',
     'menubar': True,
     'statusbar': True,
+    
+    # 👇 Important changes
+    'image_dimensions': False,  # Prevents setting fixed width/height
+    'object_resizing': False,  # Disables inline resizing
+    'valid_elements': '*[*]',  # Prevents TinyMCE from adding unwanted styles
+    'content_style': "img {max-width: 100%; height: auto;}",  # Makes images responsive
 }
 
+#JUFE-580
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
