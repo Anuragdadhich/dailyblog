@@ -17,6 +17,7 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 from django.core.cache import cache
+import os
 # Cloudinary Configuration
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -135,18 +136,12 @@ WSGI_APPLICATION = 'dailyblog.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-DATABASES = {
-    'default': dj_database_url.parse(
-        "postgresql://dailydjangoblog_user:vnEBmYNO9Wx9Mm8Dj3VIhoeoibbvClYx@dpg-cvakrc7noe9s73fb1fug-a.oregon-postgres.render.com/dailydjangoblog"
+    'default': dj_database_url.config(
+        default=os.getenv("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=True
     )
 }
-
 
 cloudinary.config( 
   cloud_name = "dcl4tnrjn",  
