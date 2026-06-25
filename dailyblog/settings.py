@@ -50,7 +50,9 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 ALLOWED_HOSTS = ["13.201.103.99"]
-
+CSRF_TRUSTED_ORIGINS = [
+    "http://13.201.103.99",
+]
 # Application definition
 
 INSTALLED_APPS = [
