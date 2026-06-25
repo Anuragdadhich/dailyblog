@@ -144,8 +144,6 @@ WSGI_APPLICATION = 'dailyblog.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-<<<<<<< HEAD
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
@@ -160,24 +158,14 @@ else:
         }
     }
 
-#cloudinary.config( 
- # cloud_name = "dcl4tnrjn",  
-#  api_key = "863211316764786",  
- # api_secret = "XEQwPYVxd95rc4QD7jWYxqQyk8U"  
-#)
-=======
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-cloudinary.config( 
-  cloud_name = "dcl4tnrjn",  
-  api_key = "863211316764786",  
-  api_secret = "XEQwPYVxd95rc4QD7jWYxqQyk8U"  
-)
->>>>>>> 82c0cb67d93459c0fdfc6421e3995a320dc720af
+
 
 # Media files configuration
 #DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
