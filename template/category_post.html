@@ -1,286 +1,86 @@
 {% extends 'base.html' %}
-
-{% block title %}{{ category.name }} - Daily Blog{% endblock %}
+{% load static %}
+{% block title %}{{ category.name }} — Daily Blog{% endblock %}
 
 {% block content %}
-<style>
-    .category-posts-container {
-        padding: 20px;
-        transition: background 0.3s, color 0.3s;
-    }
 
-    body.dark-mode .category-posts-container {
-        background: var(--background-dark);
-        color: var(--text-dark);
-    }
+<section class="cat-hero" data-testid="category-hero">
+  <h1><span class="folder"><i class="fas fa-folder-open"></i></span> {{ category.name }}</h1>
+  {% if category.description %}
+    <p class="desc">{{ category.description }}</p>
+  {% else %}
+    <p class="desc">Browse all articles in the <strong>{{ category.name }}</strong> collection.</p>
+  {% endif %}
+  <div style="font-family:var(--font-mono); font-size:12px; color:var(--muted); margin-top:var(--s-3);">
+    // showing {{ posts|length }} post{{ posts|length|pluralize }} in this category
+  </div>
+</section>
 
-    .category-title {
-        font-family: 'Tahoma', 'Verdana', sans-serif;
-        color: var(--xp-blue);
-        border-bottom: 2px solid var(--xp-dark-grey);
-        padding-bottom: 10px;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
-    body.dark-mode .category-title {
-        color: var(--xp-red);
-    }
-
-    .category-description {
-        font-size: 1rem;
-        color: var(--text-light);
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
-    body.dark-mode .category-description {
-        color: var(--text-dark);
-    }
-
-    .view-toggle-buttons {
-        text-align: right;
-        margin-bottom: 20px;
-    }
-
-    .view-toggle-buttons button {
-        background: var(--xp-button);
-        border: 1px solid #808080;
-        color: var(--text-light);
-        padding: 5px 10px;
-        font-size: 0.9rem;
-        margin-left: 5px;
-        cursor: pointer;
-        transition: background 0.3s, color 0.3s;
-    }
-
-    body.dark-mode .view-toggle-buttons button {
-        background: linear-gradient(to bottom, #2D2D2D, #1E1E1E);
-        color: var(--text-dark);
-    }
-
-    .view-toggle-buttons button.active {
-        background: var(--xp-blue);
-        color: #fff;
-    }
-
-    body.dark-mode .view-toggle-buttons button.active {
-        background: var(--xp-red);
-    }
-
-    .grid-view .post-card {
-        display: flex;
-        flex-direction: column;
-        background: var(--card-light);
-        border: var(--xp-border);
-        margin-bottom: 20px;
-        transition: transform 0.3s, background 0.3s;
-    }
-
-    body.dark-mode .grid-view .post-card {
-        background: var(--card-dark);
-    }
-
-    .grid-view .post-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .grid-view .post-image {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-bottom: var(--xp-border);
-    }
-
-    .grid-view .card-body {
-        padding: 15px;
-    }
-
-    .grid-view .card-title {
-        font-size: 1.2rem;
-        color: var(--xp-blue);
-        margin-bottom: 10px;
-    }
-
-    body.dark-mode .grid-view .card-title {
-        color: var(--xp-red);
-    }
-
-    .grid-view .card-text {
-        font-size: 0.9rem;
-        color: var(--text-light);
-        margin-bottom: 10px;
-    }
-
-    body.dark-mode .grid-view .card-text {
-        color: var(--text-dark);
-    }
-
-    .grid-view .btn-primary {
-        background: var(--xp-button);
-        border: 1px solid #808080;
-        color: var(--text-light);
-        padding: 5px 10px;
-        font-size: 0.9rem;
-        transition: background 0.3s, color 0.3s;
-    }
-
-    body.dark-mode .grid-view .btn-primary {
-        background: linear-gradient(to bottom, #2D2D2D, #1E1E1E);
-        color: var(--text-dark);
-    }
-
-    .list-view .post-card {
-        display: flex;
-        align-items: flex-start;
-        background: var(--card-light);
-        border: var(--xp-border);
-        margin-bottom: 20px;
-        padding: 15px;
-        transition: transform 0.3s, background 0.3s;
-    }
-
-    body.dark-mode .list-view .post-card {
-        background: var(--card-dark);
-    }
-
-    .list-view .post-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .list-view .post-image {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-        margin-right: 15px;
-        border: var(--xp-border);
-    }
-
-    .list-view .card-body {
-        flex: 1;
-    }
-
-    .list-view .card-title {
-        font-size: 1.2rem;
-        color: var(--xp-blue);
-        margin-bottom: 10px;
-    }
-
-    body.dark-mode .list-view .card-title {
-        color: var(--xp-red);
-    }
-
-    .list-view .card-text {
-        font-size: 0.9rem;
-        color: var(--text-light);
-        margin-bottom: 10px;
-    }
-
-    body.dark-mode .list-view .card-text {
-        color: var(--text-dark);
-    }
-
-    .list-view .btn-primary {
-        background: var(--xp-button);
-        border: 1px solid #808080;
-        color: var(--text-light);
-        padding: 5px 10px;
-        font-size: 0.9rem;
-        transition: background 0.3s, color 0.3s;
-    }
-
-    body.dark-mode .list-view .btn-primary {
-        background: linear-gradient(to bottom, #2D2D2D, #1E1E1E);
-        color: var(--text-dark);
-    }
-
-    @media (max-width: 768px) {
-        .grid-view .post-card {
-            flex-direction: column;
-        }
-
-        .list-view .post-card {
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .list-view .post-image {
-            margin-right: 0;
-            margin-bottom: 10px;
-        }
-    }
-</style>
-
-<div class="container-fluid category-posts-container">
-    <!-- Category Name -->
-    <h1 class="category-title">{{ category.name }}</h1>
-
-    <!-- Category Description -->
-    {% if category.description %}
-        <p class="category-description">{{ category.description }}</p>
-    {% endif %}
-
-    <!-- View Toggle Buttons -->
-    <div class="view-toggle-buttons">
-        <button id="gridViewBtn" class="active">Grid View</button>
-        <button id="listViewBtn">List View</button>
-    </div>
-
-    <!-- Posts in Category -->
-    <div class="row grid-view" id="postsContainer">
-        {% for post in posts %}
-            <div class="col-md-6 mb-4">
-                <div class="post-card">
-                    {% if post.image %}
-                        <img src="{{ post.image.url }}" class="post-image" alt="{{ post.title }}">
-                    {% else %}
-                        <img src="https://via.placeholder.com/600x400" class="post-image" alt="Placeholder">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ post.title }}</h5>
-                        <p class="card-text">{{ post.content| safe|truncatewords:30 }}</p>
-                        <p class="text-muted">Published on: {{ post.published_date|date:"F j, Y" }}</p>
-                        <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Read More</a>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
+<div class="section-head">
+  <h2><span class="marker"></span> All Posts</h2>
+  <div class="view-toggle" style="margin:0;" data-testid="view-toggle">
+    <button id="gridViewBtn" class="active" data-testid="grid-view-btn"><i class="fas fa-grip"></i> Grid</button>
+    <button id="listViewBtn" data-testid="list-view-btn"><i class="fas fa-list"></i> List</button>
+  </div>
 </div>
 
+<div class="post-grid" id="postsContainer" data-testid="category-posts">
+  {% for post in posts %}
+    <article class="post-card">
+      <div class="card-chrome">
+        <span>📄 {{ post.slug|truncatechars:24 }}.md</span>
+        <span class="dots"><i></i><i></i><i></i></span>
+      </div>
+      <div class="card-image-wrap">
+        {% if post.image %}
+          <img src="{{ post.image.url }}" alt="{{ post.title }}">
+        {% else %}
+          <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800" alt="Placeholder">
+        {% endif %}
+        <span class="tag-pill">{{ category.name }}</span>
+      </div>
+      <div class="card-body">
+        <h3 class="post-card-title"><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h3>
+        <p class="post-card-excerpt">{{ post.content|striptags|safe|truncatewords:28 }}</p>
+        <p class="post-card-meta">
+          <span><i class="fas fa-calendar-alt"></i> {{ post.published_date|date:"M j, Y" }}</span>
+          <span><i class="fas fa-clock"></i> <span data-words="{{ post.content|wordcount }}">5 min</span></span>
+        </p>
+        <a href="{% url 'post_detail' post.slug %}" class="post-card-link">Read more <i class="fas fa-arrow-right" style="font-size:.8em;"></i></a>
+      </div>
+    </article>
+  {% empty %}
+    <div style="grid-column:1/-1; padding:var(--s-7); text-align:center; background:var(--paper); border:1px dashed var(--line-strong);">
+      <p style="font-family:var(--font-mono); color:var(--muted);">// no posts in this category yet.</p>
+      <a href="{% url 'home' %}" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
 <script>
-    // View Toggle Functionality
-    const gridViewBtn = document.getElementById('gridViewBtn');
-    const listViewBtn = document.getElementById('listViewBtn');
-    const postsContainer = document.getElementById('postsContainer');
-
-    // Set initial view based on localStorage
-    const savedView = localStorage.getItem('viewPreference') || 'grid';
-    if (savedView === 'list') {
-        postsContainer.classList.remove('grid-view');
-        postsContainer.classList.add('list-view');
-        listViewBtn.classList.add('active');
-        gridViewBtn.classList.remove('active');
+/* View toggle (grid <-> list) with persistence */
+(function(){
+  const grid = document.getElementById('gridViewBtn');
+  const list = document.getElementById('listViewBtn');
+  const container = document.getElementById('postsContainer');
+  if(!grid || !list || !container) return;
+  function apply(mode){
+    container.classList.remove('post-grid', 'list-view');
+    if(mode==='list'){
+      container.classList.add('list-view');
+      list.classList.add('active'); grid.classList.remove('active');
+    } else {
+      container.classList.add('post-grid');
+      grid.classList.add('active'); list.classList.remove('active');
     }
-
-    // Toggle between Grid and List views
-    gridViewBtn.addEventListener('click', () => {
-        postsContainer.classList.remove('list-view');
-        postsContainer.classList.add('grid-view');
-        gridViewBtn.classList.add('active');
-        listViewBtn.classList.remove('active');
-        localStorage.setItem('viewPreference', 'grid');
-    });
-
-    listViewBtn.addEventListener('click', () => {
-        postsContainer.classList.remove('grid-view');
-        postsContainer.classList.add('list-view');
-        listViewBtn.classList.add('active');
-        gridViewBtn.classList.remove('active');
-        localStorage.setItem('viewPreference', 'list');
-    });
+    localStorage.setItem('db-cat-view', mode);
+  }
+  grid.addEventListener('click', ()=> apply('grid'));
+  list.addEventListener('click', ()=> apply('list'));
+  apply(localStorage.getItem('db-cat-view') || 'grid');
+})();
 </script>
 {% endblock %}

@@ -1,160 +1,55 @@
 {% extends 'base.html' %}
-{% block title %}Popular Posts - Daily Blog{% endblock %}
+{% load static %}
+{% block title %}Popular Posts — Daily Blog{% endblock %}
 
 {% block content %}
-<style>
-    .popular-posts-container {
-        padding: 20px;
-        transition: background 0.3s, color 0.3s;
-    }
 
-    body.dark-mode .popular-posts-container {
-        background: var(--background-dark);
-        color: var(--text-dark);
-    }
+<section class="cat-hero" data-testid="popular-hero">
+  <h1><span class="folder" style="background:linear-gradient(180deg,#FF7A45,#D63F00); border-color:#7A1F00; color:#fff;"><i class="fas fa-fire"></i></span> Popular Posts</h1>
+  <p class="desc">The most-read, most-shared articles from the Daily Blog community. Updated weekly based on real reader engagement.</p>
+  <div style="font-family:var(--font-mono); font-size:12px; color:var(--muted); margin-top:var(--s-3);">
+    // ranked by views &amp; share count · last refresh: just now
+  </div>
+</section>
 
-    .popular-posts-heading {
-        font-family: 'Tahoma', 'Verdana', sans-serif;
-        color: var(--xp-blue);
-        border-bottom: 2px solid var(--xp-dark-grey);
-        padding-bottom: 10px;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
-    body.dark-mode .popular-posts-heading {
-        color: var(--xp-red);
-    }
-
-    .popular-posts-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-        padding: 10px;
-    }
-
-    .popular-post {
-        display: flex;
-        align-items: flex-start;
-        background: var(--card-light);
-        border: var(--xp-border);
-        padding: 15px;
-        transition: transform 0.3s, background 0.3s;
-    }
-
-    body.dark-mode .popular-post {
-        background: var(--card-dark);
-    }
-
-    .popular-post:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .popular-post-image-box {
-        flex: 0 0 100px;
-        margin-right: 15px;
-    }
-
-    .popular-post-image {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-        border: var(--xp-border);
-    }
-
-    .popular-post-content {
-        flex: 1;
-    }
-
-    .popular-post-title {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-        color: var(--xp-blue);
-    }
-
-    body.dark-mode .popular-post-title {
-        color: var(--xp-red);
-    }
-
-    .popular-post-excerpt {
-        font-size: 0.9rem;
-        color: var(--text-light);
-        margin-bottom: 10px;
-    }
-
-    body.dark-mode .popular-post-excerpt {
-        color: var(--text-dark);
-    }
-
-    .popular-post-read-more {
-        display: inline-block;
-        background: var(--xp-button);
-        border: 1px solid #808080;
-        color: var(--text-light);
-        padding: 5px 10px;
-        font-size: 0.9rem;
-        text-decoration: none;
-        transition: background 0.3s, color 0.3s;
-    }
-
-    body.dark-mode .popular-post-read-more {
-        background: linear-gradient(to bottom, #2D2D2D, #1E1E1E);
-        color: var(--text-dark);
-    }
-
-    .popular-post-read-more:hover {
-        background: linear-gradient(to bottom, #d6d6d6, #f3f3f3);
-    }
-
-    @media (max-width: 768px) {
-        .popular-posts-list {
-            grid-template-columns: 1fr;
-        }
-
-        .popular-post {
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .popular-post-image-box {
-            margin-right: 0;
-            margin-bottom: 10px;
-        }
-
-        .popular-post-image {
-            width: 80px;
-            height: 80px;
-        }
-    }
-</style>
-
-<div class="container-fluid popular-posts-container">
-    <!-- Popular Posts Heading -->
-    <h1 class="popular-posts-heading">Popular Posts</h1>
-
-    <!-- Popular Posts List -->
-    <div class="popular-posts-list">
-        {% for post in popular_posts %}
-            <div class="popular-post">
-                <!-- Post Image in a Small Box -->
-                <div class="popular-post-image-box">
-                    {% if post.image %}
-                        <img src="{{ post.image.url }}" class="popular-post-image" alt="{{ post.title }}">
-                    {% else %}
-                        <img src="https://via.placeholder.com/100x100" class="popular-post-image" alt="Placeholder">
-                    {% endif %}
-                </div>
-
-                <!-- Post Title and Excerpt -->
-                <div class="popular-post-content">
-                    <h2 class="popular-post-title">{{ post.title }}</h2>
-                    <p class="popular-post-excerpt">{{ post.content| safe|truncatewords:20 }}</p>
-                    <a href="{% url 'post_detail' post.slug %}" class="popular-post-read-more">Read More</a>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
+<div class="section-head">
+  <h2><span class="marker"></span> Top Reads</h2>
+  <span class="meta">// trending right now</span>
 </div>
+
+<div class="popular-list" data-testid="popular-list">
+  {% for post in popular_posts %}
+    <article class="popular-item" data-testid="popular-item">
+      <div class="popular-rank">#{{ forloop.counter|stringformat:"02d" }}</div>
+      <div class="popular-thumb">
+        {% if post.image %}
+          <img src="{{ post.image.url }}" alt="{{ post.title }}">
+        {% else %}
+          <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?w=600" alt="Placeholder">
+        {% endif %}
+      </div>
+      <div class="popular-body">
+        <h2><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h2>
+        <p>{{ post.content|striptags|safe|truncatewords:24 }}</p>
+        <div style="display:flex; flex-wrap:wrap; gap:var(--s-3); align-items:center;">
+          <span style="font-family:var(--font-mono); font-size:12px; color:var(--muted);">
+            <i class="fas fa-calendar-alt" style="color:var(--blue);"></i> {{ post.published_date|date:"M j, Y" }}
+          </span>
+          <span style="font-family:var(--font-mono); font-size:12px; color:var(--muted);">
+            <i class="fas fa-eye" style="color:var(--blue);"></i> {{ post.views|default:"—" }} views
+          </span>
+          <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary" style="margin-left:auto;" data-testid="popular-read-btn">
+            Read <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </article>
+  {% empty %}
+    <div style="padding:var(--s-7); text-align:center; background:var(--paper); border:1px dashed var(--line-strong);">
+      <p style="font-family:var(--font-mono); color:var(--muted);">// no popular posts to show yet.</p>
+      <a href="{% url 'home' %}" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+  {% endfor %}
+</div>
+
 {% endblock %}

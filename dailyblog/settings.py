@@ -61,8 +61,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'blogi',
 ]
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 TINYMCE_JS_URL = 'https://cdn.tiny.cloud/1/7v0gmya4matogs1f0ej8z9gwga0hv636mbtb6z67wujz429r/tinymce/7/tinymce.min.js'
 TINYMCE_COMPRESSOR = False
 TINYMCE_DEFAULT_CONFIG = {
@@ -128,6 +135,7 @@ TEMPLATES = [
         },
     },
 ]
+ASGI_APPLICATION = 'dailyblog.asgi.application'
 
 WSGI_APPLICATION = 'dailyblog.wsgi.application'
 
@@ -149,14 +157,14 @@ else:
         }
     }
 
-cloudinary.config( 
-  cloud_name = "dcl4tnrjn",  
-  api_key = "863211316764786",  
-  api_secret = "XEQwPYVxd95rc4QD7jWYxqQyk8U"  
-)
+#cloudinary.config( 
+ # cloud_name = "dcl4tnrjn",  
+#  api_key = "863211316764786",  
+ # api_secret = "XEQwPYVxd95rc4QD7jWYxqQyk8U"  
+#)
 
 # Media files configuration
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+#DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
