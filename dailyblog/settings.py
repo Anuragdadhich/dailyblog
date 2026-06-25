@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "nJ1hnEZE8fFTjFp9fJsw1oJwEkDBvW_KrrBInii6yddtvaESxHZRa12ZE1TzR5KqKv0"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-DEBUG = True
+DEBUG = False
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
@@ -49,8 +49,10 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-ALLOWED_HOSTS = ["*"]
-
+ALLOWED_HOSTS = ["13.201.103.99"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://13.201.103.99",
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -143,6 +145,7 @@ WSGI_APPLICATION = 'dailyblog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+<<<<<<< HEAD
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
@@ -162,6 +165,19 @@ else:
 #  api_key = "863211316764786",  
  # api_secret = "XEQwPYVxd95rc4QD7jWYxqQyk8U"  
 #)
+=======
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+cloudinary.config( 
+  cloud_name = "dcl4tnrjn",  
+  api_key = "863211316764786",  
+  api_secret = "XEQwPYVxd95rc4QD7jWYxqQyk8U"  
+)
+>>>>>>> 82c0cb67d93459c0fdfc6421e3995a320dc720af
 
 # Media files configuration
 #DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
