@@ -36,8 +36,8 @@ SECURE_HSTS_SECONDS = 3600
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_SSL_REDIRECT = False  # Set to True if using HTTPS
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False  
 X_FRAME_OPTIONS = 'DENY'
 
 
@@ -49,7 +49,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
-ALLOWED_HOSTS = ["13.201.103.99"]
+ALLOWED_HOSTS = ["13.201.103.99","*"]
 CSRF_TRUSTED_ORIGINS = [
     "http://13.201.103.99",
 ]
@@ -145,7 +145,7 @@ WSGI_APPLICATION = 'dailyblog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-<<<<<<< HEAD
+
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
@@ -160,12 +160,7 @@ else:
         }
     }
 
-#cloudinary.config( 
- # cloud_name = "dcl4tnrjn",  
-#  api_key = "863211316764786",  
- # api_secret = "XEQwPYVxd95rc4QD7jWYxqQyk8U"  
-#)
-=======
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -177,7 +172,7 @@ cloudinary.config(
   api_key = "863211316764786",  
   api_secret = "XEQwPYVxd95rc4QD7jWYxqQyk8U"  
 )
->>>>>>> 82c0cb67d93459c0fdfc6421e3995a320dc720af
+
 
 # Media files configuration
 #DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
