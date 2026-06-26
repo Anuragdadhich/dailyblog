@@ -144,11 +144,9 @@ WSGI_APPLICATION = 'dailyblog.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 5be9c414af0f0bdddf94803298ffc31d00cf67cc
+
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
@@ -170,14 +168,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-<<<<<<< HEAD
-cloudinary.config( 
-  cloud_name = "dcl4tnrjn",  
-  api_key = "863211316764786",  
-  api_secret = "XEQwPYVxd95rc4QD7jWYxqQyk8U"  
-)
-=======
->>>>>>> 5be9c414af0f0bdddf94803298ffc31d00cf67cc
+
 
 
 # Media files configuration
