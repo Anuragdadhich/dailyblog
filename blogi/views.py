@@ -246,3 +246,11 @@ def add_comment_htmx(request):
         # Return HTML for the new comment
         return render(request, 'partials/comment.html', {'comment': comment})
     return HttpResponse('')
+def robots_txt(request):
+    lines = [
+        "User-Agent: *",
+        "Allow: /",
+        "",
+        "Sitemap: https://devheaven.tech/sitemap.xml",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")

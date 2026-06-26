@@ -1,7 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}{{ post.title }} — DevHaven{% endblock %}
+{% block title %}
+{{ post.title }}
+{% endblock %}
 
+{% block description %}
+{{ post.meta_description|default:post.content|truncatewords:25 }}
+{% endblock %}
+
+{% block og_title %}
+{{ post.title }}
+{% endblock %}
+
+{% block og_description %}
+{{ post.content|truncatewords:25 }}
+{% endblock %}
 {% block content %}
 
 <div class="post-detail-grid" data-testid="post-detail">

@@ -9,6 +9,7 @@ urlpatterns = [
     path('post/<slug:slug>/', views.post_detail, name='post_detail'),
     path('search/', views.search, name='search'),
     path('popular/', views.popular_posts, name='popular_posts'),
+    path("robots.txt", views.robots_txt, name="robots_txt"),
     path('privacy/', views.privacy, name='privacy'),
     path('ipl/', views.ipl_page, name='ipl_page'),
     

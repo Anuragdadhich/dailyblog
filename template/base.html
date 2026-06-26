@@ -4,9 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}DevHaven{% endblock %}</title>
-    <meta name="description" content="DevHaven — a premium tech blog with a touch of classic Windows charm.">
+   <title>{% block title %}DevHeaven - Latest Tech News{% endblock %}</title>
 
+<meta name="description"
+      content="{% block description %}Latest AI, Programming, Cyber Security and Tech News.{% endblock %}">
+
+<meta name="keywords"
+      content="AI, Python, Django, Programming, Technology, DevHeaven">
+
+<meta name="author" content="DevHeaven">
+
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DevHeaven">
+<meta property="og:title" content="{% block og_title %}DevHeaven{% endblock %}">
+<meta property="og:description" content="{% block og_description %}Latest AI and Technology News{% endblock %}">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{% block twitter_title %}DevHeaven{% endblock %}">
+<meta name="twitter:description" content="{% block twitter_description %}Latest AI and Technology News{% endblock %}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "DevHeaven",
+  "url": "https://devheaven.tech",
+  "description": "Latest AI, Programming, Cyber Security and Technology News",
+  "publisher": {
+    "@type": "Organization",
+    "name": "DevHeaven"
+  }
+}
+</script>
     <!-- Fonts: Space Grotesk (main) + JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1416,6 +1448,16 @@
         }
     </style>
     {% block extra_head %}{% endblock %}
+    <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6W1CB1243K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-6W1CB1243K');
+</script>
 </head>
 <body>
 

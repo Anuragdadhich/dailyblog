@@ -24,7 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "nJ1hnEZE8fFTjFp9fJsw1oJwEkDBvW_KrrBInii6yddtvaESxHZRa12ZE1TzR5KqKv0"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-DEBUG = False
+DEBUG = True
+
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
     'channels',
     'blogi',
 ]
